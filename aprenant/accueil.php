@@ -3,6 +3,7 @@
 
 <!-- Code de la page -->
 <main>
+    <div class="gotop"><span><i class="fas fa-arrow-up"></i></span></div>
     <div class="nav_icon">
         <div class="icon"><img src="../assets/img/menu_icon.png"></img></div>
     </div>
@@ -43,7 +44,7 @@
     <div class="partie_3">
         
     </div>
-    <a class="gotop" href="#"></a>
+    
 </main>
 
 
