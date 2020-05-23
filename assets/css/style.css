@@ -1,0 +1,150 @@
+/*fonts*/
+@font-face {
+  font-family: "Akrobat-Regular";
+  src: url("../fonts/Akrobat-Regular.ttf") format("truetype");  
+}
+
+@font-face{
+  font-family: "Akrobat-Bold";
+  src: url("../fonts/Akrobat-Bold.ttf") format("truetype");
+}
+
+
+body{
+  margin: 0;
+  padding: 0;
+}
+main{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+nav{
+  height: 150px;
+  width: 100%;
+  background-color: #ffe900;
+  display: none;
+}
+.parallax{
+  width: 100%;
+  height: 700px;
+
+  background-image: url(../img/img_accueil_3.png);
+  
+  
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.neon{
+  color: #FAFAFA;
+  text-shadow: 0 0 20px #ffe900;
+}
+h1{
+  font-family: "Akrobat-Bold";
+  font-size: 50px;
+  text-transform: uppercase;
+}
+.partie_1{
+  width: 100%;
+  height: 500px;
+  justify-content: center;
+  text-align: center;
+  background-color: #FAFAFA;
+}
+.nav_icon{
+  position: fixed;
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  
+  padding-top: 20px;
+}
+.icon{
+  height: 80px;
+  width: 80px;
+  margin-right: 20px;
+  
+}
+.icon:hover{
+  cursor: pointer;
+}
+img:hover nav{
+  display: block;
+}
+img{
+  width: 100%;
+  height: 100%;
+}
+.partie_2{
+  width: 100%;
+  height: 600px;
+  position: relative;
+}
+
+.pres{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 233, 0, 0.7);
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+}
+.pres .text_img, .pres .img {
+  width: 50%;
+  height: 100%;
+  color: #271549;
+}
+.img-1{
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.img-2{
+  
+  
+  
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.text_img{
+  padding: 0 20px 0 20px;
+}
+.description{
+  font-size: large;
+  font-family: "Akrobat-Regular";
+}
+.des-1{
+  color: #38BFC3;
+}
+.des-2{
+  color: #4b3526;
+}
+.partie_3{
+  width: 100%;
+  height: 500px;
+  background-color: #271549;
+}
+.gotop{
+  width: 50px;
+  height: 40px;
+  bottom: 0;
+  right: 75px;
+  background-color: #ffe900;
+  display: block;
+  position: fixed;
+  border-radius: 4px 4px 0 0;
+}
+
