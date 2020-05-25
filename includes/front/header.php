@@ -9,8 +9,7 @@ if($_SESSION["type"] == "etudiant"){
                 <i class="fas fa-align-left"></i>
             </span>
         </div>
-        <nav>
-            
+        <nav class="nav-etudiant">
             <ul>
                 <li><span><i class="fas fa-plus-circle"></i></span>Nouveau</li>
                 <li><span><i class="fas fa-users"></i></span>S'inscrire</li>
@@ -25,4 +24,20 @@ if($_SESSION["type"] == "etudiant"){
     
 </header>
 
+<?php } ?>
+
+<?php 
+if($_SESSION["type"] == "professeur"){
+?>
+<main class="main-accueil-professeur">
+    <div class="div-nav-prof">
+        <div>
+            <nav class="nav-prof">
+                <ul>
+                    <li>Groupes</li>
+                    <li>Validation</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 <?php } ?>

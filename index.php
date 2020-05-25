@@ -43,8 +43,9 @@ if($_SERVER['REQUEST_METHOD'] = 'POST'){
 			header('location: /aprenant/accueil.php');
 			
 		}
-		else{
-			
+		elseif($_POST['password'] == 'professeur' and $_POST['username'] == 'professeur'){
+			$_SESSION["type"] = "professeur";
+			header('location: /professeur/accueil.php');
 		}
 	}
 
