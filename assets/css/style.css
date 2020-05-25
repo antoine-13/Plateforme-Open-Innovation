@@ -10,6 +10,8 @@
 }
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
 body{
   margin: 0;
   padding: 0;
@@ -531,7 +533,7 @@ img{
 }
 
 /* Syle de la page d'accueil des professeurs */
-.div-nav-prof{
+.sidebar{
   width: 15%;
   height: 100%;
   position: fixed;
@@ -543,11 +545,33 @@ img{
 .main-accueil-professeur{
   width: 100%;
   height: 100%;
-
+}
+.sidebar-nav ul{
+  display: flex;
+  flex-direction: column;
+  font-family: 'Josefin';
+}
+.sidebar ul li a{
+  text-decoration: none;
+  color: #FAFAFA;
+  font-family: 'Josefin';
 }
 .main-container{
   height: 100%;
-  width: 85%;
+  width: 100%;
   margin-left: 15%;
   background-color: red;
+}
+
+/* Style scroll Bar */
+::-webkit-scrollbar{
+  width: 12px;
+  background: #261547;
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 6px;
+  background: linear-gradient(transparent, #1963a0);
+}
+::-webkit-scrollbar-thumb:hover{
+  background: linear-gradient(transparent,#ffdd63);
 }

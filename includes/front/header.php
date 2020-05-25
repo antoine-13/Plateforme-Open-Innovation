@@ -30,14 +30,14 @@ if($_SESSION["type"] == "etudiant"){
 if($_SESSION["type"] == "professeur"){
 ?>
 <main class="main-accueil-professeur">
-    <div class="div-nav-prof">
-        <div>
-            <nav class="nav-prof">
-                <ul>
-                    <li>Groupes</li>
-                    <li>Validation</li>
-                </ul>
-            </nav>
-        </div>
+    <div class="sidebar">
+        
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="">Groupes</a></li>
+                <li><a href="">Validation</a></li>
+            </ul>
+        </nav>
+        
     </div>
 <?php } ?>
