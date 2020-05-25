@@ -1,6 +1,4 @@
-<?php 
- include_once("../includes/back/connect.php");
-?>
+<?php session_start();?>
 <html lang="FR-fr">
 <head>
 	<meta charset="UTF-8">
