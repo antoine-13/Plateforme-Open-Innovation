@@ -7,6 +7,16 @@ window.addEventListener('scroll', function(){
   scroll.classList.toggle("active" , window.scrollY > 200);
 })
 
+window.addEventListener('scroll', function(){
+  var scroll = document.querySelector('.pres .text_img:nth-child(1) h2');
+  scroll.classList.toggle("active" , window.scrollY > 1500);
+})
+window.addEventListener('scroll', function(){
+  var scroll = document.querySelector('.pres .text_img:nth-child(2) h2');
+  scroll.classList.toggle("active" , window.scrollY > 800);
+})
+
+
 function gotop(){
     window.scrollTo({
         top: 0

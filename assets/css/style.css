@@ -22,6 +22,10 @@ main{
   height: 100%;
   position: relative;
 }
+.main-acceuil-aprenant{
+  background-image: url(../img/fonts.png);
+  background-repeat: repeat;
+}
 
 /* Style de la page d'accueil*/
 .container-nav{
@@ -85,7 +89,7 @@ main{
 }
 .parallax{
   width: 100%;
-  height: 700px;
+  height: 100vh;
 
   background-image: url(../img/img_accueil_3.png);
 
@@ -114,15 +118,15 @@ h1{
 }
 .partie_1{
   width: calc(100% - 30px);
-  height: 500px;
-  background: linear-gradient(#5b4784, #f6bd60);
+  height: 50vh;
+  background: transparent;
   padding-top: 20px;
   padding-left: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.partie_1 h2{
+h2{
   margin: 0;
   color: transparent;
   -webkit-text-stroke: 1px #FAFAFA;
@@ -131,11 +135,11 @@ h1{
   position: relative;
   transition: all 0.5s ease-in-out;
 }
-.partie_1 h2.active{
+h2.active{
   color: #FAFAFA;
   -webkit-text-stroke: 1px #FAFAFA;
 }
-.partie_1 h2:before{
+h2:before{
   content: attr(data-text);
   position: absolute;
   top: 0;
@@ -143,7 +147,7 @@ h1{
   font-family: 'Ubuntu', sans-serif;
   transition: all 0.5s ease-in-out;
 }
-.partie_1 h2.active:before{
+h2.active:before{
   -webkit-text-stroke: 1px black;
   color: #f6bd60;
   transform: translate(5px, -5px);
@@ -164,7 +168,7 @@ h1{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #38bfc3;
+  background-color: #f6bd5a;
   border-radius: 5px;
   margin-right: 50px;
 }
@@ -192,47 +196,58 @@ img{
 }
 .partie_2{
   width: 100%;
-  height: 600px;
+  height: 50vh;
+  margin-top: 100px;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .pres{
-  width: 100%;
+  width: calc(100% - 15%);
   height: 100%;
-  background: linear-gradient(#f6bd60, #271549);
+  padding: 0 15%;
+  background: transparent;
   position: absolute;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
-.pres .text_img, .pres .img {
+.pres .img{
   width: 50%;
   height: 100%;
   color: #271549;
 }
-
+.pres .img > img{
+  border-radius: 10px;
+}
 .text_img{
+  width: 30%;
   padding: 0 20px 0 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+}
+.text_img h2{
+  margin-bottom: 20px;
+}
+.partie_2 .pres:nth-child(1) h2{
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
 }
 .description{
   font-size: large;
   font-family: "Akrobat-Regular";
   text-align: justify;
+  color: black;
 }
-.des-1{
-  color: #38BFC3;
-}
-.des-2{
-  color: #4b3526;
-}
+
 .partie_3{
   width: 100%;
-  height: 400px;
-  background-color: hsl(261, 55%, 18%);
-  padding-top: 50px;
+  height: 50vh;
+  background-color: transparent;
+  padding-top: 150px;
 }
 .text-part-3{
   width: 100%;
@@ -279,7 +294,7 @@ img{
 }
 .button::before, .button::after{
   content: "";
-  background-color: #261547;
+  background-color: #b2b5f3;
   height: 4px;
   width: 14px;
   position: absolute;
@@ -305,7 +320,7 @@ img{
 }
 .button:hover{
   background-color: #FAFAFA;
-  color: #261547;
+  color: #b2b5f3;
   
 }
 
@@ -333,7 +348,7 @@ img{
   cursor: pointer;
 }
 .gotop span{
-  color: #38bfc3;
+  color: #b2b5f3;
   font-size: 30px;
 }
 
@@ -545,6 +560,8 @@ img{
 .main-accueil-professeur{
   width: 100%;
   height: 100%;
+  background-image: url(../img/fonts.png);
+  background-repeat: repeat;
 }
 .sidebar-logo{
   width: 100%;
@@ -586,20 +603,155 @@ img{
 }
 .sidebar-logo{
   width: calc(100% - 60px);
-  padding: 30px 30px 80px 30px;
+  padding: 30px 30px 70px 30px;
 }
 
 .main-container{
   height: 100%;
-  width: 100%;
+  width: calc(100% - 15%);
   margin-left: 15%;
-  background-color: #FAFAFA;
+  background: transparent;
+}
+.main-container h1{
+  padding-left: 30px;
+  padding-top: 5vh;
+  margin-bottom: 0;
+}
+.stats{
+  width: 100%;
+  height: 130px;
+  display: flex;
+  padding-top: 4vh;
+  flex-direction: row;
+  justify-content: space-around;
+  
+
+}
+.stats > div {
+  width: calc(18% - 40px);
+  height: auto;
+  display: flex;
+  padding: 20px;
+  flex-direction: row;
+  background: #FAFAFA;
+  border-radius: 5px;
+  box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15)!important;
+  
+
+}
+.stat-1 {
+  border-left: 0.35rem solid #f6c23e;
+  border-right: 0.35rem solid #f6c23e;
+}
+.stat-2 {
+  border-left: 0.35rem solid #52b788;
+  border-right: 0.35rem solid #52b788;
+}
+.stat-3 {
+  border-left: 0.35rem solid #9d0208;
+  border-right: 0.35rem solid #9d0208;
+}
+.stat-4 {
+  border-left: 0.35rem solid #36b9cc;
+  border-right: 0.35rem solid #36b9cc;
+}
+.stat-1 .stat-text span:nth-child(1){
+  color: #f6c23e;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+.stat-2 .stat-text span:nth-child(1){
+  color: #52b788;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+.stat-3 .stat-text span:nth-child(1){
+  color: #9d0208;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+.stat-4 .stat-text span:nth-child(1){
+  color: #36b9cc;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+.stat-text span:nth-child(2){
+  font-size: 30px;
+  color: #5a5c69;
+}
+.stat-text{
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.stat-text span{
+  width: 100%;
+}
+.stat-logo{
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.stat-logo span{
+  color: #dddfeb;
+  font-size: 35px;
+}
+
+.graph{
+  width: calc(100% - 60px);
+  height: calc(65vh - 50px);
+  padding: 50px 30px 0 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.graph-1{
+  width: 67%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+}
+.graph-2{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.titre-graphe{
+  width: 100%;
+  height: 10%;
+  background: #f8f9fc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.graphique{
+  width: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 90%;
+  background: #FFF;
 }
 
 /* Style scroll Bar */
 ::-webkit-scrollbar{
   width: 12px;
-  background: #261547;
+  background: #b2b5f3;
 }
 ::-webkit-scrollbar-thumb{
   border-radius: 6px;
