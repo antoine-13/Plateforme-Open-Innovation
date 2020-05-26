@@ -11,13 +11,13 @@ if($_SESSION["type"] == "etudiant"){
         </div>
         <nav class="nav-etudiant">
             <ul>
-                <li><span><i class="fas fa-plus-circle"></i></span>Nouveau</li>
-                <li><span><i class="fas fa-users"></i></span>S'inscrire</li>
+                <li class="li-etudiant"><span><i class="fas fa-plus-circle"></i></span>Nouveau</li>
+                <li class="li-etudiant"><span><i class="fas fa-users"></i></span>S'inscrire</li>
                 <li class="Open-innov-logo">
                     <img src="../../assets/img/logo open innov.png" alt=""></img>
                 </li>
-                <li><span><i class="fas fa-file-import"></i></span>Rendu</li>
-                <li><span><i class="fas fa-info-circle"></i></span>Contact</li>
+                <li class="li-etudiant"><span><i class="fas fa-file-import"></i></span>Rendu</li>
+                <li class="li-etudiant"><span><i class="fas fa-info-circle"></i></span>Contact</li>
             </ul>
         </nav>
     </div>
@@ -31,13 +31,15 @@ if($_SESSION["type"] == "professeur"){
 ?>
 <main class="main-accueil-professeur">
     <div class="sidebar">
-        
-        <nav class="sidebar-nav">
-            <ul>
-                <li><a href="">Groupes</a></li>
-                <li><a href="">Validation</a></li>
-            </ul>
-        </nav>
+        <div class="sidebar-logo">
+            <img src="../../assets/img/logo open innov.png" alt="">
+        </div>
+        <ul>
+            <li><a href=""><span><i class="fas fa-home"></i></span>Home</a></li>
+            <li><a href=""><span><i class="fas fa-users"></i></span>Groupes</a></li>
+            <li><a href=""><span><i class="fas fa-clipboard-check"></i></span>Validation</a></li>
+        </ul>
+
         
     </div>
 <?php } ?>

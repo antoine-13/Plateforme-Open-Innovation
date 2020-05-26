@@ -56,7 +56,7 @@ main{
   clip-path: circle(75%);
 }
 
-ul{
+.nav-etudiant > ul{
   list-style: none;
   display: flex;
   padding: 0;
@@ -66,7 +66,7 @@ ul{
   justify-content: space-between;
   
 }
-li{
+.li-etudiant{
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
@@ -75,7 +75,7 @@ li{
   font-size: 25px;
   font-family: 'Ubuntu', sans-serif;
 }
-li span{
+.li-etudiant span{
   margin-left: 10px;
 }
 
@@ -537,30 +537,63 @@ img{
   width: 15%;
   height: 100%;
   position: fixed;
-  background-color: #261547;
+  background-color: #4b4276;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
 }
 .main-accueil-professeur{
   width: 100%;
   height: 100%;
 }
-.sidebar-nav ul{
+.sidebar-logo{
+  width: 100%;
+  height: 100px;
+}
+.sidebar > ul{
   display: flex;
   flex-direction: column;
   font-family: 'Josefin';
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
-.sidebar ul li a{
+.sidebar > ul > li{
+  padding: 15px;
+  width: calc(100% - 30px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(225, 225, 225, 0.05);
+  display: flex;
+  justify-content: start;
+
+}
+.sidebar > ul > li > a{
   text-decoration: none;
-  color: #FAFAFA;
+  color: #bdb8d7;
   font-family: 'Josefin';
+  font-size: 25px;
 }
+.sidebar > ul > li > a > span{
+  width: 25px;
+  margin-right: 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+.sidebar > ul > li:hover{
+  background: #594f8d;
+}
+.sidebar > ul > li:hover > a{
+  color: #FFF;
+}
+.sidebar-logo{
+  width: calc(100% - 60px);
+  padding: 30px 30px 80px 30px;
+}
+
 .main-container{
   height: 100%;
   width: 100%;
   margin-left: 15%;
-  background-color: red;
+  background-color: #FAFAFA;
 }
 
 /* Style scroll Bar */

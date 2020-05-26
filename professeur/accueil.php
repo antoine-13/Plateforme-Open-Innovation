@@ -3,7 +3,9 @@
 
 <!-- Coder ici -->
     <div class="main-container">
-        
+        <div class="stats">
+
+        </div>
     </div>
 
 
