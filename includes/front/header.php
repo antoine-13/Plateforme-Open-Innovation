@@ -29,16 +29,17 @@ if($_SESSION["type"] == "etudiant"){
 <?php 
 if($_SESSION["type"] == "professeur"){
 ?>
-<main class="main-accueil-professeur">
+<main class="main-professeur">
     <div class="sidebar">
         <div class="sidebar-logo">
             <img src="../../assets/img/logo open innov.png" alt="">
         </div>
         <ul>
-            <li><a href=""><span><i class="fas fa-home"></i></span>Home</a></li>
-            <li><a href=""><span><i class="fas fa-users"></i></span>Groupes</a></li>
+            <li><a href="../../professeur/accueil.php"><span><i class="fas fa-home"></i></span>Home</a></li>
+            <li><a href="../../professeur/projets.php"><span><i class="fas fa-users"></i></span>Projets</a></li>
             <li><a href=""><span><i class="fas fa-clipboard-check"></i></span>Validation</a></li>
         </ul>
+        <span>Copyright &copy; FOUVRY</span>
 
         
     </div>

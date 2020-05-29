@@ -1,3 +1,14 @@
+var myVar;
+
+function loadFunction() {
+  myVar = setTimeout(showPage, 1000);
+}
+
+function showPage() {
+  document.getElementById("loader-wrapper").style.display = "none";
+  document.querySelector("main").style.display = "block";
+}
+
 window.addEventListener('scroll', function(){
     var scroll = document.querySelector('.gotop');
     scroll.classList.toggle("active" , window.scrollY > 500);
@@ -42,4 +53,18 @@ function lsRememberMe() {
     localStorage.username = "";
     localStorage.checkbox = "";
   }
+}
+
+
+
+
+function swipe(id){
+  if(id == "right"){
+    document.querySelector(".tab-info-groups").id = "left";
+  } else if(id == "left"){
+    document.querySelector(".tab-info-groups").id = "right";
+  } else{
+      document.querySelector(".tab-info-groups").id = "left";
+  }
+  
 }

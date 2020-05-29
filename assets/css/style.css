@@ -16,15 +16,37 @@ body{
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  position: relative;
 }
 main{
   width: 100%;
   height: 100%;
   position: relative;
 }
-.main-acceuil-aprenant{
-  background-image: url(../img/fonts.png);
-  background-repeat: repeat;
+
+/* Style loading page */
+.loader-wrapper{
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background: #FFF;
+}
+.loader-wrapper > .wrapper-img{
+  width: 700px;
+  height: 500px;
+}
+/* style footer */
+footer{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
 }
 
 /* Style de la page d'accueil*/
@@ -77,7 +99,7 @@ main{
   align-items: center;
   color: #0c6cae;
   font-size: 25px;
-  font-family: 'Ubuntu', sans-serif;
+
 }
 .li-etudiant span{
   margin-left: 10px;
@@ -112,7 +134,7 @@ main{
   text-shadow: 0 0 20px #ffce61;
 }
 h1{
-  font-family: "Akrobat-Bold";
+
   font-size: 50px;
   text-transform: uppercase;
 }
@@ -130,7 +152,6 @@ h2{
   margin: 0;
   color: transparent;
   -webkit-text-stroke: 1px #FAFAFA;
-  font-family: 'Ubuntu', sans-serif;
   font-size: 2em;
   position: relative;
   transition: all 0.5s ease-in-out;
@@ -144,7 +165,6 @@ h2:before{
   position: absolute;
   top: 0;
   left: 0;
-  font-family: 'Ubuntu', sans-serif;
   transition: all 0.5s ease-in-out;
 }
 h2.active:before{
@@ -184,7 +204,6 @@ h2.active:before{
 .competances-logo span{
   font-size: 20px;
   color: #FAFAFA;
-  font-family: 'Ubuntu', sans-serif;
 }
 .competances-logo > .logo-comp{
   font-size: 50px;
@@ -238,7 +257,6 @@ img{
 }
 .description{
   font-size: large;
-  font-family: "Akrobat-Regular";
   text-align: justify;
   color: black;
 }
@@ -289,7 +307,6 @@ img{
   cursor: pointer;
   background: transparent;
   transition: background-color 0.5s ease-in-out;
-  font-family: 'Ubuntu', sans-serif;
   position: relative;
 }
 .button::before, .button::after{
@@ -443,7 +460,6 @@ img{
   margin-top: 70px;
   color: #1963a0;
   font-size: 20px;
-  font-family: 'Ubuntu', sans-serif;
 }
 .input{
   margin-top: 0.5rem;
@@ -557,11 +573,13 @@ img{
   flex-direction: column;
 
 }
-.main-accueil-professeur{
-  width: 100%;
-  height: 100%;
+body{
   background-image: url(../img/fonts.png);
   background-repeat: repeat;
+}
+.main-professeur{
+  width: 100%;
+  height: 100%;
 }
 .sidebar-logo{
   width: 100%;
@@ -570,7 +588,6 @@ img{
 .sidebar > ul{
   display: flex;
   flex-direction: column;
-  font-family: 'Josefin';
   margin: 0;
   padding: 0;
   width: 100%;
@@ -587,7 +604,6 @@ img{
 .sidebar > ul > li > a{
   text-decoration: none;
   color: #bdb8d7;
-  font-family: 'Josefin';
   font-size: 25px;
 }
 .sidebar > ul > li > a > span{
@@ -605,7 +621,14 @@ img{
   width: calc(100% - 60px);
   padding: 30px 30px 70px 30px;
 }
-
+.sidebar > span{
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  color: #bdb8d7;
+  padding: 10px 0;
+}
 .main-container{
   height: 100%;
   width: calc(100% - 15%);
@@ -747,6 +770,153 @@ img{
   height: 90%;
   background: #FFF;
 }
+.wrapper{
+  width: calc(100% - 60px);
+  height: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.wrapper > .card{
+  position: relative;
+  margin-top: 80px;
+  max-width: 300px;
+  height: 215px;
+  background: #FFF;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 202px rgba(0,0,0, 0.5);
+  transition: all 0.4s ease-in-out;
+}
+.wrapper > .card:hover{
+  height: 370px;
+}
+.wrapper > .card > .imgBox{
+  position: relative;
+  width: 260px;
+  height: 260px;
+  top: -60px;
+  left: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+.wrapper > .card > .content{
+  position: relative;
+  margin-top: -60px ;
+  padding: 10px 15px;
+  text-align: center;
+  color: #111;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+.wrapper > .card:hover > .content{
+  margin-top: -40px ;
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0.3s;
+
+}
+.wrapper > .card > .content > span:nth-child(3){
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.wrapper > .card > .content > span:nth-child(1){
+  font-size: 25px;
+  font-weight: bold;
+  
+}
+.tab-info-groups{
+  width: 90%;
+  height: 100%;
+  background: #FFF;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+.tab-info-groups::before{
+  content: attr(progress);
+  z-index: 1000;
+  background: red;
+  width: 50%;
+  height: 5px;
+  position: absolute;
+  top: 0;
+  transition: all 0.5s ease-in-out;
+}
+#left.tab-info-groups::before{
+ animation: moveright 0.5s ease-in-out;
+ right: 0;
+}
+#right.tab-info-groups::before{
+  animation: moveleft 0.5s ease-in-out;
+  left: 0;
+ }
+.groups, .user{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+#left.tab-info-groups .groups{
+  animation: left 0.5s ease-in-out;
+  left: 100%;
+}
+#right.tab-info-groups .groups{
+  animation: cancelleft 0.5s ease-in-out;
+  left: 0%;
+}
+.groups .content{
+  width: 100%;
+  background: yellow;
+}
+.user .content{
+  background: green;
+  width: 100%;
+}
+.right-button{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #f8f9fc;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.right-button:hover{
+  cursor: pointer;
+  background: rgb(219, 219, 233)
+}
+
+.right-button span{
+  color: #ffdd63;
+  font-size: 50px;
+}
+/* Animation */
+@-webkit-keyframes moveright {
+  from { right: 50%;}
+  to { right: 0;}
+}
+@-webkit-keyframes moveleft {
+  from { left: 50%;}
+  to { left: 0;}
+}
+@-webkit-keyframes left {
+  from { left: 0%;}
+  to { left: 100%;}
+}
+@-webkit-keyframes cancelleft {
+  from { left: 100%;}
+  to { left: 0%;}
+}
+
+
 
 /* Style scroll Bar */
 ::-webkit-scrollbar{

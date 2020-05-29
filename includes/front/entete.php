@@ -7,4 +7,4 @@
 	<link rel="icon" href="assets/img/favicon.png" />
 	<title>Open Innov</title>
 </head>
-<body>
+<body onload="loadFunction()">

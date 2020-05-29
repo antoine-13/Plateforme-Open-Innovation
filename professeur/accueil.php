@@ -53,10 +53,8 @@
             </div>
         </div>
     </div>
-
-
-
 </main>
+
 
 <!-- include du footer -->
 <?php include_once("../includes/front/footer.php") ?>
