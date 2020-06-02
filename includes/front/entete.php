@@ -1,4 +1,8 @@
-<?php session_start();?>
+<?php 
+	include_once("$_SERVER[DOCUMENT_ROOT]/includes/back/connect.php");
+	session_start();
+	
+?>
 <html lang="FR-fr">
 <head>
 	<meta charset="UTF-8">
