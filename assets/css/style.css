@@ -288,11 +288,15 @@ img{
   flex-direction: column;
   margin-top: 50px;
 }
+.start-button > div:nth-child(1){
+  margin-bottom: 80px;
+}
 .row{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  margin-bottom: 50px;
+}
+.center{
+  justify-content: space-evenly;
 }
 
 .button{
@@ -947,6 +951,7 @@ body{
   background-color: #FFF;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
   padding: 0px 10px 0px 10px;
+  position: relative;
 }
 .info-projet{
   width: 70%;
@@ -962,6 +967,14 @@ body{
   margin: 0;
   justify-content: flex-end;
 }
+.info-dowlnoad a{
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  color: #52b788;
+  align-items: center;
+
+}
 .info-dowlnoad > span {
   align-items: center;
   display: flex;
@@ -971,13 +984,14 @@ body{
 .actions{
   background: #FFF;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-  width: 90%;
-  height: 10%;
+  width: calc(90% + 60px);
+  height: calc(auto + 20px);
   margin-top: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  flex-wrap: wrap;
 }
 .groupes .row{
   margin-bottom: 0;
@@ -991,6 +1005,7 @@ body{
 .actions span{
   align-items: center;
   justify-content: center;
+  margin-left: 5px;
 }
 .actions a{
   height: calc(100% - 1.5em);
@@ -1003,8 +1018,55 @@ body{
   border: 2px solid #52b788;
   color: #52b788;
 }
+.supp a{
+  border: 2px solid #9d0208;
+  color: #9d0208;
+}
 .actions a::after, .actions a::before{
   background: #FFF;
+}
+.fondateur{
+  color: #36b9cc;
+}
+.fondateur span{
+  color: #36b9cc;
+}
+.membres{
+  color: #f6c23e;
+}
+.membres span{
+  color: #f6c23e;
+}
+.nom-membres{
+  display: flex;
+  flex-direction: column;
+}
+.nom-membres > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.right{
+  justify-content: flex-end !important;
+}
+.mail-general{
+  position: absolute;
+  width: calc(100% - 5px);
+  padding-right: 5px;
+  bottom: 0px;
+  left: 0;
+}
+.rendu{
+  background: #FFF;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  width: calc(90% + 60px);
+  height: calc(auto + 20px);
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
 }
 /* Style scroll Bar */
 ::-webkit-scrollbar{

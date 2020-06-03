@@ -67,11 +67,11 @@
             <span>Commencez l'aventure !</span>
         </div>
         <div class="start-button">
-            <div class="row">
+            <div class="row center">
                 <a href="#" class="button" data-5-end="left: 0; " data-bottom-top="left: -200px;" >Nouveau</a>
                 <a href="#" class="button" data-5-end="left: 0; " data-bottom-top="left: 200px;" >Rejoindre</a>
             </div>
-            <div class="row">
+            <div class="row center">
                 <a href="#" class="button" data-5-end="top: 0; " data-bottom-top="top: 200px;" >Contact</a>
             </div>
         </div>
