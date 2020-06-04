@@ -12,21 +12,20 @@ CREATE TABLE Projet(
    id_projet VARCHAR(50),
    validation boolean NOT NULL,
    nom_projet VARCHAR(50) NOT NULL,
+   url_img varchar(50) NOT NULL,
    id_soutenance VARCHAR(50) NOT NULL,
    id_createur VARCHAR(50) NOT NULL,
-   PRIMARY KEY(id_projet),
-   FOREIGN KEY(id_soutenance) REFERENCES Soutenance(id_soutenance),
-   FOREIGN KEY(id_createur) REFERENCES Participant(id_participant)
+   PRIMARY KEY(id_projet)
 );
 
 CREATE TABLE Description(
    id_description VARCHAR(50),
    fichier_description VARCHAR(50),
-   texte_description VARCHAR(50),
-   besoins VARCHAR(50),
-   technos VARCHAR(50),
-   etapes VARCHAR(50),
-   competances VARCHAR(50),
+   texte_description TEXT(5000),
+   besoins TEXT(5000),
+   technos TEXT(5000),
+   etapes TEXT(5000),
+   competances TEXT(5000),
    id_projet VARCHAR(50) NOT NULL,
    PRIMARY KEY(id_description),
    FOREIGN KEY(id_projet) REFERENCES Projet(id_projet)
@@ -61,3 +60,10 @@ CREATE TABLE Participant(
    FOREIGN KEY(id_groupe) REFERENCES Groupe(id_groupe),
    FOREIGN KEY(id_groupe_1) REFERENCES Groupe(id_groupe)
 );
+
+ALTER TABLE Projet
+   ADD CONSTRAINT FK_id_soutenance FOREIGN KEY(id_soutenance) REFERENCES Soutenance(id_soutenance);
+
+ALTER TABLE Projet
+   ADD CONSTRAINT FK_id_createur FOREIGN KEY(id_createur) REFERENCES Participant(id_participant);
+   

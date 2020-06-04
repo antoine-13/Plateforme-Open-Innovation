@@ -18,9 +18,13 @@
     $exec = $req3->execute(array($id));
     $result3 = $req3->fetchAll();
 
-    $req4 = $db->prepare("SELECT texte_description, besoins, technos, etapes, competances  FROM description as  d INNER JOIN projet as p ON d.id_projet = p.id_projet WHERE p.id_projet = ?");
+    $req4 = $db->prepare("SELECT texte_description, besoins, technos, etapes, competances  FROM description as  d INNER JOIN projet as p ON d.id_projet = p.id_projet WHERE d.id_projet = ?");
     $exec = $req4->execute(array($id));
     $result4 = $req4->fetchAll();
+
+    $req5 = $db->prepare("SELECT date_rendu, fichier_rendu FROM rendu as  r INNER JOIN projet as p ON r.id_projet = p.id_projet WHERE r.id_projet = ? AND fichier_rendu IS NOT NULL");
+    $exec = $req5->execute(array($id));
+    $result5 = $req5->fetchAll();
 ?>
 
 
@@ -93,14 +97,44 @@
         </div>
         <div class="rendu">
             <h3>Rendus</h3>
-                    
+            <div>
+                <span>Fichiers rendus :</span>
+                <?php foreach($result5 as $value) {?>
+                    <span><?php echo $value['date_rendu'] . ' '?> <a href=""><span><i class="fas fa-download"></i></span></a></span>
+                <?php }?>
+            </div>
+            <div>
+                <span>Rendu à venir </span>
+            </div>
         </div>
         <div class="actions">
-            <div class="new">
-                <a href="#" class="button">Nouveau rendu <span><i class="fas fa-plus-square"></i></span></a>
+            <div class="row">
+                <div class="new">
+                    <a href="" class="button" onclick="new_rendu()">Nouveau rendu <span><i class="fas fa-plus-square"></i></span></a>
+                </div>
+                <div class="supp">
+                    <a href="../delete.php?id=<?php echo $id?>" class="button" >Supprimer le projet<span><i class="fas fa-trash"></i></span></a>
+                </div>
             </div>
-            <div class="supp">
-                <a href="#" class="button" >Supprimer le projet<span><i class="fas fa-trash"></i></span></a>
+            <div class="row form_new_rendu">
+                    <form method="post">
+                        <input type="date" name='date'>
+                        <input type="text" placeholder="Titre rendu" name='titre'></input>
+                        <input type="text" placeholder="Description du travail demandé" name='travail'></input>
+                        <button type="submit"></button>
+                    </form>
+
+                    <?php
+                    
+                        if($_SERVER['REQUEST_METHOD'] = 'POST'){
+                            if(!empty($_POST['date']) AND !empty($_POST['titre']) AND !empty($_POST['travail'])){
+                            
+                                $req6 = $db->prepare('INSERT INTO rendu (date, titre, travail) VALUES ?, ?, ?');
+                                $exec = $req6->execute(array($_POST['date'],$_POST['titre'],$_POST['travail']));
+                                
+                            }
+                        }
+                    ?>
             </div>
         </div>
     </div>

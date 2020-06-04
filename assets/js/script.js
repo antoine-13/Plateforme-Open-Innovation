@@ -68,3 +68,7 @@ function swipe(id){
   }
   
 }
+
+function new_rendu(){
+  
+}

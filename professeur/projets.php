@@ -1,7 +1,7 @@
 <!-- include du header -->
 <?php include_once("../includes/front/header.php"); 
 
-    $req1 = $db->prepare('SELECT id_projet, nom_projet, url_img FROM projet');
+    $req1 = $db->prepare('SELECT id_projet, nom_projet, url_img FROM projet WHERE validation = 1');
     $exec = $req1->execute();
     $result = $req1->fetchAll();
 ?>
