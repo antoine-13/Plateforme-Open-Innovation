@@ -1,5 +1,6 @@
 var myVar;
 
+
 function loadFunction() {
   myVar = setTimeout(showPage, 1000);
 }
@@ -8,6 +9,11 @@ function showPage() {
   document.getElementById("loader-wrapper").style.display = "none";
   document.querySelector("main").style.display = "block";
 }
+
+window.addEventListener('scroll', function(){
+  var nav = document.querySelector('.container-nav');
+  nav.classList.toggle("active" , window.scrollY > 200);
+})
 
 window.addEventListener('scroll', function(){
     var scroll = document.querySelector('.gotop');
@@ -20,7 +26,7 @@ window.addEventListener('scroll', function(){
 
 window.addEventListener('scroll', function(){
   var scroll = document.querySelector('.pres .text_img:nth-child(1) h2');
-  scroll.classList.toggle("active" , window.scrollY > 1500);
+  scroll.classList.toggle("active" , window.scrollY > 1200);
 })
 window.addEventListener('scroll', function(){
   var scroll = document.querySelector('.pres .text_img:nth-child(2) h2');
@@ -69,6 +75,13 @@ function swipe(id){
   
 }
 
-function new_rendu(){
-  
+function new_rendu_professeur(){
+  document.querySelector(".form_new_rendu").classList.add("active");
 }
+function new_rendu_etudiant(){
+  document.querySelector(".form_new_rendu_etudiant").classList.add("active");
+}
+function inscription(){
+  document.querySelector(".form-inscription").classList.add("active");
+}
+

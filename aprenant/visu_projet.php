@@ -32,7 +32,7 @@
 ?>
 
 
-<div class="main-container">
+<div class="main-container-aprenant">
     <h1><?php echo $result1[0]['nom_projet']; ?></h1>
     <div class="projet">
         <div class="collumn">
@@ -95,14 +95,6 @@
                 <h3>Quelles sont les compétences attendues pour ce projet ?</h3>
                 <p><?php echo $result4[0]['competances']?></p>
             </div>
-            <?php if ($_SESSION['type'] == "professeur") {?>
-                <div class="info-dowlnoad row">
-                    <a href="../utils/download.php?id=<?php echo $id?>">
-                        <span><i class="fas fa-download"></i></span>
-                        <h3>Telecharger les fichiers du projet</h3>
-                    </a>
-                </div>
-            <?php } ?>
         </div>
         <div class="rendu">
             <div class="row rendu-titre">
@@ -113,7 +105,7 @@
                 <span>Fichiers rendus :</span>
                     <?php $test = 0; foreach($result5 as $value) {?>
                         <div>
-                            <span><?php echo $value['date_fichier_rendu'] . ' '?> <a href=""><span><i class="fas fa-download"></i></span></a></span>
+                            <span><?php echo $value['date_fichier_rendu'] . ' '?> </span>
                         </div>
                     <?php $test = $test + 1;}
                         if($test == 0){
@@ -135,21 +127,72 @@
                     ?>
             </div>
         </div>
-        <div class="row form_new_rendu">
+        <div class="form_new_rendu_etudiant">
                     <h3>Nouveau rendu</h3>
+                    <form method="post" enctype="multipart/form-data" action="">
+                        
+                        <div class="choix">
+                            <label for="choix">Choisir rendu</label>
+                            <select name="choix" id="">
+                            <?php $req9 = $db->prepare("SELECT id_rendu, titre_rendu FROM rendu WHERE fichier_rendu IS NULL");
+                                $exec = $req9->execute();
+                                $result9 = $req9->fetchAll();
+
+                                foreach($result9 as $result){ ?>
+                                <option value="<?php echo $result['id_rendu']?>"><?php echo $result['titre_rendu']?></option>
+                                <?php }
+                            
+                            ?>
+                            </select>
+                        </div>
+                        <div class="drop-zone">
+                            <input type="file" multiple="" name="file[]" id="file" is="drop-files" />
+                        </div>
+                        <div class ="choix">
+                            <input type="text" placeholder="Commentaires" name='commentaire'></input>
+                        </div>
+                        <div class="row">
+                            <button type="submit">Validez</button>
+                        </div>
+                    </form>
+
+                    <?php
+                    
+                        if($_SERVER['REQUEST_METHOD'] = 'POST'){
+                            $fileCount = count($_FILES['file']['name']);
+                            for($i=0; $i < $fileCount; $i++){
+                                $filename = $_FILES['file']['name'][$i];
+                                move_uploaded_file($_FILES['file']['tmp_name'][$i], 'upload/' . $filename);
+                            }
+
+                        }
+                    ?>
+        </div>
+        <div class="form-inscription">
+                    <h3>S'inscrire</h3>
                     <form method="post">
                         <div class="row">
                             <div>
-                                <label for="date">Date limite</label>
-                                <input type="date" name='date'>
+                                <label for="nom">Nom</label>
+                                <input type="text" name='nom' placeholder='Votre nom'>
                             </div>
                             <div>
-                                <label for="titre">Titre</label>
-                                <input type="text" placeholder="Titre rendu" name='titre'></input>
+                                <label for="prenom">Prenom</label>
+                                <input type="text" placeholder="prenom" name='prenom'></input>
                             </div>
                             <div>
-                                <label for="travail">Consignes</label>
-                                <input type="text" placeholder="Description du travail demandé" name='travail'></input>
+                                <label for="promo">Promo</label>
+                                <select name="promo" id="">
+                                    <option value="B1">B1</option>
+                                    <option value="B2">B2</option>
+                                    <option value="B3">B3</option>
+                                    <option value="M1">M1</option>
+                                    <option value="M2">M2</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="email">Prenom</label>
+                                <input type="email" placeholder="email" name='email'></input>
                             </div>
                         </div>
                         <div class="row">
@@ -160,23 +203,27 @@
                     <?php
                     
                         if($_SERVER['REQUEST_METHOD'] = 'POST'){
-                            if(!empty($_POST['date']) && !empty($_POST['titre']) && !empty($_POST['travail'])){
-                                $date = $_POST['date'];
-                                $titre = $_POST['titre'];
-                                $consignes = $_POST['travail'];
+                            if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['promo']) && !empty($_POST['email'])){
+                                $nom = $_POST['nom'];
+                                $prenom = $_POST['prenom'];
+                                $promo = $_POST['promo'];
+                                $email = $_POST['email'];
                                 
-                                $req7 = $db->prepare("SELECT COUNT(id_rendu) as nbr_rendu FROM rendu WHERE titre_rendu = ?");
-                                $exec = $req7->execute(array($titre));
-                                $nbr_rendu = $req7->fetchAll();
+                                $req7 = $db->prepare("SELECT COUNT(id_participant) as nbr FROM participant WHERE email = ?");
+                                $exec = $req7->execute(array($email));
+                                $nbr = $req7->fetchAll();
 
 
-                                if($nbr_rendu[0]['nbr_rendu'] == 0){
-                                    $req8 = $db->prepare("INSERT INTO rendu (date_rendu, titre_rendu, consignes, id_projet) VALUES ('$date', '$titre', '$consignes', '$id')");
+                                if($nbr_rendu[0]['nbr'] == 0){
+                                    $req10 = $db->prepare("SELECT id_groupe FROM groupe WHERE id_projet = ?");
+                                    $exec = $req10->execute(array($id));
+                                    $result10 = $req10->fetchAll();
+                                    $req8 = $db->prepare("INSERT INTO participant (nom_participant, prenom_participant, promo, email, id_groupe) VALUES ('$date', '$titre', '$consignes', '$result10[0]['id_groupe']')");
                                     $exec = $req8->execute();
                                     
                                 }
                                 else{
-                                    echo "<script>alert(\"Ce rendu existe déjà\")</script>";
+                                    echo "<script>alert(\"Vous etes déjà inscrit !\")</script>";
                                 }
                                 
                             }
@@ -185,16 +232,17 @@
                     ?>
         </div>
         <div class="actions">
-            <?php if($_SESSION['type'] = 'professeur'){?>
-                <div class="row">
+            <?php if($_SESSION['type'] = 'etudiant') { ?>
+                 <div class="row">
                     <div class="new">
-                        <a class="button" onclick="new_rendu_professeur()">Nouveau rendu <span><i class="fas fa-plus-square"></i></span></a>
+                        <a class="button" onclick="new_rendu_etudiant()">Nouveau rendu <span><i class="fas fa-plus-square"></i></span></a>
                     </div>
-                    <div class="supp">
-                        <a href="../../delete.php?id=<?php echo $id?>" class="button" >Supprimer le projet<span><i class="fas fa-trash"></i></span></a>
+                    <div class="incription">
+                        <a class="button" onclick="inscription()">S'inscrire au projet<span><i class="fas fa-plus-circle"></i></span></a>
                     </div>
                 </div>
             <?php }?>
+            
         </div>
     </div>
 </div>

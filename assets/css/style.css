@@ -34,6 +34,7 @@ main{
   justify-content: center;
   align-items: center;
   background: #FFF;
+  z-index: 1000000;
 }
 .loader-wrapper > .wrapper-img{
   width: 700px;
@@ -50,65 +51,44 @@ footer{
 }
 
 /* Style de la page d'accueil*/
-.container-nav{
+.container-nav {
   position: fixed;
-  z-index: 1000;
-  width: 100%;
-}
-.nav-etudiant{
-  height: 100px;
+  z-index: 100000;
   width: 100%;
   display: flex;
   justify-content: space-around;
-  background-color: #ffce61;
-  box-shadow: 0px 2px 10px grey;
-  clip-path: circle(0% at 5% 0%);
-  transition: clip-path .5s ease-in-out;
+  align-items: center;
+  transition: 0.5s;
 }
-.logo-nav{
+.container-nav.active{
+  opacity: 0;
+}
+.nav-etudiant{
+  height: auto;
+  position: relative;
   width: auto;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.nav-etudiant > a{
+  text-decoration: none;
+  font-size: 2em;
+  color: #000;
+  margin: 0 20px;
+}
+.marker{
   position: absolute;
-  margin-top: 20px;
-  margin-left: 20px;
-  width: 100%;
-  height: 100%;
-}
-.Open-innov-logo{
-  height: 100%;
-  width: 150px;
-}
-
-.logo-nav:hover ~ nav{
-  clip-path: circle(75%);
+  height: 4px;
+  left: 0;
+  width: 0;
+  background: #000;
+  bottom: -8px;
+  transition: 0.5s;
+  border-radius: 4px;
 }
 
-.nav-etudiant > ul{
-  list-style: none;
-  display: flex;
-  padding: 0;
-  flex-direction: row;
-  align-items: center;
-  width: 50%;
-  justify-content: space-between;
-  
-}
-.li-etudiant{
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: center;
-  color: #0c6cae;
-  font-size: 25px;
-
-}
-.li-etudiant span{
-  margin-left: 10px;
-}
-
-
-.logo-nav span{
-  font-size: 30px;
-}
 .parallax{
   width: 100%;
   height: 100vh;
@@ -146,7 +126,12 @@ h1{
   padding-left: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+}
+.main_pres{
+  width: 80%;
+  padding-left: 20px;
+  padding-top: 10px;
 }
 h2{
   margin: 0;
@@ -172,43 +157,7 @@ h2.active:before{
   color: #f6bd60;
   transform: translate(5px, -5px);
 }
-.competances{
-  width: 100%;
-  height: 200px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-bottom: 50px;
-  z-index: 1000;
-}
-.competances-logo{
-  height: 100%;
-  width: 10%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #f6bd5a;
-  border-radius: 5px;
-  margin-right: 50px;
-}
-.competances-logo:nth-child(1){
-  box-shadow: -5px 5px 5px #d3d3d3;
-}
-.competances-logo:nth-child(2){
-  box-shadow: 0px 5px 5px #d3d3d3;
-}
-.competances-logo:nth-child(3){
-  box-shadow: 5px 5px 5px #d3d3d3;
-}
-.competances-logo span{
-  font-size: 20px;
-  color: #FAFAFA;
-}
-.competances-logo > .logo-comp{
-  font-size: 50px;
-  margin-bottom: 10px;
-}
+
 img{
   width: 100%;
   height: 100%;
@@ -817,6 +766,7 @@ body{
   visibility: hidden;
   opacity: 0;
   transition: 0.3s ease-in-out;
+  
 }
 .wrapper > .card:hover > .content{
   margin-top: -40px ;
@@ -834,6 +784,20 @@ body{
   font-size: 25px;
   font-weight: bold;
   
+}
+.wrapper form{
+  margin: 0;
+  position: absolute;
+  bottom: -25px;
+  right: 0;
+}
+.wrapper form button{
+  background: #f6bd5a;
+  border: none;
+  border-radius: 10px;
+}
+.wrapper form button:hover{
+  cursor: pointer;
 }
 .tab-info-groups{
   width: 90%;
@@ -922,9 +886,16 @@ body{
 
 
 /* Style visu_projet */
+.main-container-aprenant{
+  padding-top: 50px;
+  width: 100%;
+}
+.main-container-aprenant > h1{
+  padding-left: 20px;
+}
 .projet{
   width: calc(100% - 100px);
-  height: 80%;
+  height: auto;
   display: flex;
   flex-wrap: wrap;
   padding: 20px 50px 20px 50px;
@@ -936,7 +907,7 @@ body{
   flex-direction: column;
   justify-content: space-between;
   width: 20%;
-  height: 90%;
+  height: 600px;
   margin-right: 20px;
 }
 .img-projet{
@@ -953,15 +924,21 @@ body{
   padding: 0px 10px 0px 10px;
   position: relative;
 }
+.groupes h3{
+  text-decoration: underline;
+}
 .info-projet{
   width: 70%;
-  height: calc(90% - 40px);
+  height: calc(600px - 40px);
   background-color: #FFF;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
   padding: 20px 20px 20px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.info-projet > div > h3 {
+  text-decoration: underline;
 }
 .info-dowlnoad{
   margin: 0;
@@ -982,16 +959,20 @@ body{
   margin-right: 10px;
 }
 .actions{
-  background: #FFF;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  background: transparent;
   width: calc(90% + 60px);
-  height: calc(auto + 20px);
+  height: 100px;
   margin-top: 30px;
+  padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
+}
+.actions .row:nth-child(1){
+  width: 100%;
+  justify-content: space-evenly;
 }
 .groupes .row{
   margin-bottom: 0;
@@ -1023,7 +1004,15 @@ body{
   color: #9d0208;
 }
 .actions a::after, .actions a::before{
-  background: #FFF;
+  background: #b2b5f3;
+}
+.new a:hover{
+  background: #f6c23e;
+  color: #FFF;
+}
+.supp a:hover{
+  background: #9d0208;
+  color: #FFF;
 }
 .fondateur{
   color: #36b9cc;
@@ -1046,27 +1035,188 @@ body{
   flex-direction: row;
   justify-content: space-between;
 }
-.right{
-  justify-content: flex-end !important;
-}
+
 .mail-general{
   position: absolute;
   width: calc(100% - 5px);
   padding-right: 5px;
   bottom: 0px;
   left: 0;
+  justify-content: center !important;
+  color: #0c6cae;
+}
+.mail-general > a{
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  color: #0c6cae;
+}
+.mail-general > a > span {
+  color: #0c6cae;
+  margin-left: 5px;
 }
 .rendu{
   background: #FFF;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-  width: calc(90% + 60px);
-  height: calc(auto + 20px);
+  width: calc(90% + 40px);
+  height: 250px;
   margin-top: 30px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
+  padding-left: 20px;
+  padding-top: 20px;
   flex-wrap: wrap;
+}
+.rendu-titre{
+  align-items: center;
+  color: #0c6cae;
+  text-decoration: underline;
+  font-size: 1.5em;
+}
+.rendu-titre > h3{
+  padding-left: 10px;
+  margin: 0;
+}
+.rendu > div {
+  margin-bottom: 10px;
+}
+.rendu > div > span{
+  text-decoration: underline;
+}
+.rendu > div > div {
+  padding-left: 20px;
+  padding-right: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+.form_new_rendu{
+  height: 0;
+  width: calc(90% + 20px);
+  opacity: 0;
+  background: #FFF;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  padding-right: 20px;
+
+}
+.form_new_rendu.active{
+  margin-top: 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  background: #FFF;
+  height: 170px;
+  opacity: 1;
+}
+.form_new_rendu h3{
+  color: #0c6cae;
+  text-decoration: underline;
+  font-size: 1.5em;
+}
+.form_new_rendu .row > div {
+  display: flex;
+  flex-direction: column;
+}
+.form_new_rendu .row:nth-child(1){
+  justify-content: space-evenly;
+}
+.form_new_rendu .row:nth-child(2){
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.form-inscription{
+  height: 0;
+  display: none;
+  opacity: 0;
+  background: #FFF;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  width: calc(90% + 60px);
+}
+.form-inscription input{
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+}
+.form-inscription form{
+  display: none;
+}
+.form-inscription.active form{
+  display: block;
+}
+.form-inscription.active{
+  display: block;
+  margin-top: 30px;
+  height: 170px;
+  opacity: 1;
+  width: calc(90% + 60px);
+}
+.form_new_rendu_etudiant{
+  height: 0;
+  opacity: 0;
+  width: calc(90% + 60px);
+  display: none;
+  background: #FFF;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+.form_new_rendu_etudiant input{
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+}
+.form_new_rendu_etudiant form{
+  display: none;
+}
+.form_new_rendu_etudiant.active form{
+  display: block;
+  padding-left: 10px;
+  margin: 0;
+}
+.form_new_rendu_etudiant.active{
+  display: block;
+  margin-top: 30px;
+  height: 300px;
+  opacity: 1;
+  width: calc(90% + 20px);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.form_new_rendu_etudiant .row{
+  justify-content: flex-end;
+}
+.form_new_rendu_etudiant > nav {
+  display: flex;
+  flex-direction: column;
+}
+.choix{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.drop-zone{
+  margin-bottom: 20px;
+}
+.choix select{
+  width: 50%;
+  transition: 0.5s;
+}
+.choix input{
+  width: 30%;
+  transition: 0.5s;
+}
+.choix input:focus{
+  width: 50%;
+  border-bottom: 1px solid #f6bd5a;
+}
+.choix label{
+  margin-bottom: 5px;
 }
 /* Style scroll Bar */
 ::-webkit-scrollbar{

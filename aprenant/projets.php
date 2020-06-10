@@ -7,7 +7,7 @@
 
 <!-- Coder ici -->
 <?php
-if($_SESSION["type"] == "professeur"){
+if($_SESSION["type"] == "etudiant"){
 ?>
 <div class="main-container-aprenant">
     <h1>Projets</h1>

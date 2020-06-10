@@ -2,6 +2,7 @@
 <?php include_once("../includes/front/header.php"); ?>
 
 <!-- Code de la page -->
+
 <main class="main-acceuil-aprenant">
     <div class="gotop" onclick="gotop()"><span><i class="fas fa-arrow-up"></i></span></div>
     
@@ -21,20 +22,6 @@
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec nulla sapien. Nam nibh est, iaculis a ultricies in, viverra cursus urna. Maecenas maximus eleifend nulla, ut dapibus tellus pulvinar sed. Sed egestas elit dui, in elementum tortor venenatis vel. Integer mollis risus eu erat rhoncus, vel dictum lacus facilisis. Sed tincidunt leo in velit varius, vel pellentesque ligula maximus. In blandit nec lacus interdum consectetur. Sed magna quam, tincidunt vitae tincidunt a, dictum vel turpis. Fusce varius vel diam ac interdum. Sed aliquet ullamcorper aliquet.
 
             Suspendisse vel gravida tellus. Donec varius purus sit amet tellus bibendum gravida. Nam et nisl tempus, suscipit ipsum nec, congue elit. Phasellus nec varius magna. Mauris quis imperdiet augue. Aenean vulputate sed lacus et vulputate. Integer ullamcorper finibus erat eget ultricies. Sed orci magna, cursus id ante at, gravida mollis ligula. Ut aliquam nulla et massa consectetur, ut iaculis orci aliquet. Proin quis tincidunt purus, ornare vehicula enim. Mauris luctus, mauris sed fermentum venenatis, enim tortor bibendum turpis, a rhoncus dui ligula ut enim.</span>
-        </div>
-        <div class="competances">
-            <div class="competances-logo" data-bottom-top="margin-right: 700px;" data-center-top="margin-right : 50px;">
-                <span class="logo-comp"><i class="fas fa-file-code"></i></span>
-                <span>Developpement</span>
-            </div>
-            <div class="competances-logo" data-bottom-top="margin-top: 300px;" data-center-top="margin-top : 0px;">
-                <span class="logo-comp"><i class="fas fa-brain"></i></span>
-                <span>Reflexion</span>
-            </div>
-            <div class="competances-logo" data-bottom-top="margin-left: 700px;" data-center-top="margin-left : 0px;">
-                <span class="logo-comp"><i class="fas fa-pencil-alt"></i></span>
-                <span>Design</span>
-            </div>
         </div>
     </div>
     <div class ="partie_2">
@@ -69,14 +56,13 @@
         <div class="start-button">
             <div class="row center">
                 <a href="#" class="button" data-5-end="left: 0; " data-bottom-top="left: -200px;" >Nouveau</a>
-                <a href="#" class="button" data-5-end="left: 0; " data-bottom-top="left: 200px;" >Rejoindre</a>
+                <a href="projets.php" class="button" data-5-end="left: 0; " data-bottom-top="left: 200px;" >Rejoindre</a>
             </div>
             <div class="row center">
                 <a href="#" class="button" data-5-end="top: 0; " data-bottom-top="top: 200px;" >Contact</a>
             </div>
         </div>
     </div>
-    
 </main>
 
 
