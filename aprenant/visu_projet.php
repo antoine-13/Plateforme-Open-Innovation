@@ -129,10 +129,10 @@
         </div>
         <div class="form_new_rendu_etudiant">
                     <h3>Nouveau rendu</h3>
-                    <form method="post" enctype="multipart/form-data" action="">
+                    <form action="" method="post" enctype="multipart/form-data">
                         
                         <div class="choix">
-                            <label for="choix">Choisir rendu</label>
+                            <label for="choix">Choisir rendu :</label>
                             <select name="choix" id="">
                             <?php $req9 = $db->prepare("SELECT id_rendu, titre_rendu FROM rendu WHERE fichier_rendu IS NULL");
                                 $exec = $req9->execute();
@@ -146,23 +146,43 @@
                             </select>
                         </div>
                         <div class="drop-zone">
-                            <input type="file" multiple="" name="file[]" id="file" is="drop-files" />
+                            <input type="file" name="pictures[]" multiple="" id="file" is="drop-files"/>
                         </div>
                         <div class ="choix">
                             <input type="text" placeholder="Commentaires" name='commentaire'></input>
                         </div>
                         <div class="row">
-                            <button type="submit">Validez</button>
+                            <button type="submit" class="submitfx">Validez</button>
                         </div>
                     </form>
 
                     <?php
-                    
+                        
                         if($_SERVER['REQUEST_METHOD'] = 'POST'){
-                            $fileCount = count($_FILES['file']['name']);
-                            for($i=0; $i < $fileCount; $i++){
-                                $filename = $_FILES['file']['name'][$i];
-                                move_uploaded_file($_FILES['file']['tmp_name'][$i], 'upload/' . $filename);
+                            if(isset($_FILES['pictures'])){
+                                $id_rendu = $_POST['choix'];
+                                $date = date("Y-m-d");
+                                
+                                $req11 = $db->prepare("SELECT nom_projet FROM Projet  as p INNER JOIN Rendu as r ON  p.id_projet=r.id_projet WHERE r.id_rendu = ?");
+                                $exec = $req11->execute();
+                                $result11 = $req11->fetchAll();
+
+                                foreach ($_FILES["pictures"]["error"] as $key => $error) {
+                                    if ($error == UPLOAD_ERR_OK) {
+                                        $tmp_name = $_FILES["pictures"]["tmp_name"][$key];
+                    
+                                        // basename() peut empêcher les attaques "filesystem traversal";
+                                        // une autre validation/néttoyage du nom de fichier peux être appropriée
+                                        $name = basename($_FILES["pictures"]["name"][$key]);
+                                        $destination = "files/" . $result11[0]['nom_projet'] . "\/rendu/" . $name;
+                                        move_uploaded_file($tmp_name, "../". $destination);
+
+                                        $req12 = $db->prepare("INSERT INTO Fichier (destination, date_rendu, id_rendu) VALUES ?, ?, ?");
+                                        $exec = $req12->execute(array($destination, $date ,$id_rendu));
+                                        
+                                        echo "<script>alert(\"Suceed !\")</script>";
+                                    }
+                                }
                             }
 
                         }
@@ -173,15 +193,17 @@
                     <form method="post">
                         <div class="row">
                             <div>
-                                <label for="nom">Nom</label>
+                                <label for="nom">Nom :</label>
                                 <input type="text" name='nom' placeholder='Votre nom'>
                             </div>
                             <div>
-                                <label for="prenom">Prenom</label>
-                                <input type="text" placeholder="prenom" name='prenom'></input>
+                                <label for="prenom">Prenom :</label>
+                                <input type="text" placeholder="Votre prenom" name='prenom'></input>
                             </div>
+                        </div>
+                        <div class="row">
                             <div>
-                                <label for="promo">Promo</label>
+                                <label for="promo">Promo :</label>
                                 <select name="promo" id="">
                                     <option value="B1">B1</option>
                                     <option value="B2">B2</option>
@@ -191,12 +213,14 @@
                                 </select>
                             </div>
                             <div>
-                                <label for="email">Prenom</label>
-                                <input type="email" placeholder="email" name='email'></input>
+                                <label for="email">Email :</label>
+                                <input type="email" placeholder="Votre email" name='email'></input>
                             </div>
                         </div>
+                        
                         <div class="row">
-                            <button type="submit">Validez</button>
+                            <button type="submit" class="submitfx">Validez
+                            </button>
                         </div>
                     </form>
 
@@ -204,6 +228,7 @@
                     
                         if($_SERVER['REQUEST_METHOD'] = 'POST'){
                             if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['promo']) && !empty($_POST['email'])){
+                                
                                 $nom = $_POST['nom'];
                                 $prenom = $_POST['prenom'];
                                 $promo = $_POST['promo'];
@@ -213,13 +238,15 @@
                                 $exec = $req7->execute(array($email));
                                 $nbr = $req7->fetchAll();
 
-
                                 if($nbr_rendu[0]['nbr'] == 0){
                                     $req10 = $db->prepare("SELECT id_groupe FROM groupe WHERE id_projet = ?");
                                     $exec = $req10->execute(array($id));
                                     $result10 = $req10->fetchAll();
-                                    $req8 = $db->prepare("INSERT INTO participant (nom_participant, prenom_participant, promo, email, id_groupe) VALUES ('$date', '$titre', '$consignes', '$result10[0]['id_groupe']')");
+                                    $id_groupe = $result10[0]['id_groupe'];
+                                    $req8 = $db->prepare("INSERT INTO participant (nom_participant, prenom_participant, promo, email, id_groupe) VALUES ('$nom', '$prenom', '$promo', '$email', '$id_groupe')");
                                     $exec = $req8->execute();
+                                    echo "<script>alert(\"Inscription réussit !\")</script>";
+                                   
                                     
                                 }
                                 else{

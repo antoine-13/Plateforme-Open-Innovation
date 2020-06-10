@@ -85,3 +85,5 @@ function inscription(){
   document.querySelector(".form-inscription").classList.add("active");
 }
 
+
+
