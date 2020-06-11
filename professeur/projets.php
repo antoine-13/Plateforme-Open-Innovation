@@ -25,8 +25,17 @@ if($_SESSION["type"] == "professeur"){
                             $exec = $req2->execute(array($projet['id_projet']));
                             $result2 = $req2->fetchAll();
                             
-                            $description = wordwrap($result2[0]['texte_description'], 10);
-                            echo $description;
+                            $description = str_split($result2[0]['texte_description']);
+
+                            for($i=0; $i<=150; $i++){
+                                if(isset($description[$i])){
+                                    echo $description[$i];
+                                }
+                                else{
+                                    echo ' ';
+                                }
+                            }
+                            echo ' ...'
 
                         
                         ?>

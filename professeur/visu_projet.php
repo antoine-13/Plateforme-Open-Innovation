@@ -145,16 +145,16 @@
                                 <input type="date" name='date'>
                             </div>
                             <div>
-                                <label for="titre">Titre</label>
+                                
                                 <input type="text" placeholder="Titre rendu" name='titre'></input>
                             </div>
                             <div>
-                                <label for="travail">Consignes</label>
-                                <input type="text" placeholder="Description du travail demandé" name='travail'></input>
+                                
+                                <input type="text" placeholder="Consignes" name='travail'></input>
                             </div>
                         </div>
                         <div class="row">
-                            <button type="submit">Validez</button>
+                            <button type="submit" class="submitfx">Validez</button>
                         </div>
                     </form>
 
@@ -189,10 +189,10 @@
             <?php if($_SESSION['type'] = 'professeur'){?>
                 <div class="row">
                     <div class="new">
-                        <a class="button" onclick="new_rendu_professeur()">Nouveau rendu <span><i class="fas fa-plus-square"></i></span></a>
+                        <a class="button" onclick="new_rendu_professeur()"><span>Nouveau rendu</span><span><i class="fas fa-plus-square"></i></span></a>
                     </div>
                     <div class="supp">
-                        <a href="../../delete.php?id=<?php echo $id?>" class="button" >Supprimer le projet<span><i class="fas fa-trash"></i></span></a>
+                        <a href="../../delete.php?id=<?php echo $id?>" class="button" ><span>Supprimer le projet</span><span><i class="fas fa-trash"></i></span></a>
                     </div>
                 </div>
             <?php }?>

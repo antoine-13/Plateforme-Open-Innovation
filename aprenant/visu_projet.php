@@ -22,11 +22,11 @@
     $exec = $req4->execute(array($id));
     $result4 = $req4->fetchAll();
 
-    $req5 = $db->prepare("SELECT SELECT titre_rendu, date_rendu FROM rendu WHERE id_rendu != (SELECT id_rendu FROM fichier GROUP BY id_rendu)");
+    $req5 = $db->prepare("SELECT titre_rendu, date_rendu FROM rendu WHERE id_rendu NOT IN (SELECT id_rendu FROM fichier GROUP BY id_rendu)");
     $exec = $req5->execute();
     $result5 = $req5->fetchAll();
 
-    $req6 = $db->prepare("SELECT titre_rendu FROM rendu WHERE id_rendu = (SELECT id_rendu FROM fichier GROUP BY id_rendu)");
+    $req6 = $db->prepare("SELECT id_rendu, titre_rendu FROM rendu WHERE id_rendu IN (SELECT id_rendu FROM fichier GROUP BY id_rendu)");
     $exec = $req6->execute();
     $result6 = $req6->fetchAll();
 ?>
@@ -262,10 +262,10 @@
             <?php if($_SESSION['type'] = 'etudiant') { ?>
                  <div class="row">
                     <div class="new">
-                        <a class="button" onclick="new_rendu_etudiant()">Nouveau rendu <span><i class="fas fa-plus-square"></i></span></a>
+                        <a class="button" onclick="new_rendu_etudiant()"><span>Nouveau rendu</span><span><i class="fas fa-plus-square"></i></span></a>
                     </div>
                     <div class="incription">
-                        <a class="button" onclick="inscription()">S'inscrire au projet<span><i class="fas fa-plus-circle"></i></span></a>
+                        <a class="button" onclick="inscription()"><span>S'inscrire au projet</span><span><i class="fas fa-plus-circle"></i></span></a>
                     </div>
                 </div>
             <?php }?>
