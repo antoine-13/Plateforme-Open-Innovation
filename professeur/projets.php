@@ -9,7 +9,7 @@
 <?php
 if($_SESSION["type"] == "professeur"){
 ?>
-<div class="main-container-aprenant">
+<div class="main-container">
     <h1>Projets</h1>
     <div class="wrapper">
         <?php foreach($result as $projet)  { ?>

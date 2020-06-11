@@ -14,7 +14,7 @@ CREATE TABLE Projet(
    validation boolean NOT NULL,
    nom_projet VARCHAR(50) NOT NULL,
    url_img varchar(50) NOT NULL,
-   id_createur VARCHAR(50) NOT NULL,
+   id_createur INT NOT NULL,
    PRIMARY KEY(id_projet)
 );
 
@@ -26,7 +26,7 @@ CREATE TABLE Description(
    technos TEXT(5000),
    etapes TEXT(5000),
    competances TEXT(5000),
-   id_projet VARCHAR(50) NOT NULL,
+   id_projet INT NOT NULL,
    PRIMARY KEY(id_description)
 );
 
@@ -35,7 +35,7 @@ CREATE TABLE Rendu(
    date_rendu DATE,
    titre_rendu VARCHAR(50) NOT NULL,
    consignes TEXT(5000) NOT NULL,
-   id_projet VARCHAR(50) NOT NULL,
+   id_projet INT NOT NULL,
    PRIMARY KEY(id_rendu)
 );
 
@@ -43,6 +43,7 @@ CREATE TABLE Fichier(
    id_fichier INT NOT NULL AUTO_INCREMENT,
    destination VARCHAR(50) NOT NULL,
    date_rendu DATE NOT NULL,
+   commentaire TEXT(5000),
    id_rendu INT NOT NULL,
    PRIMARY KEY(id_fichier)
 );
@@ -50,7 +51,7 @@ CREATE TABLE Fichier(
 CREATE TABLE Groupe(
    id_groupe INT NOT NULL AUTO_INCREMENT,
    numero_groupe INT,
-   id_projet VARCHAR(50) NOT NULL,
+   id_projet INT NOT NULL,
    PRIMARY KEY(id_groupe)
 );
 
@@ -60,8 +61,8 @@ CREATE TABLE Participant(
    prenom_participant VARCHAR(50) NOT NULL,
    promo VARCHAR(50) NOT NULL,
    email VARCHAR(50) NOT NULL,
-   id_groupe VARCHAR(50),
-   id_groupe_1 VARCHAR(50),
+   id_groupe INT,
+   id_groupe_1 INT,
    PRIMARY KEY(id_participant)
 );
 

@@ -1090,6 +1090,11 @@ body{
   display: flex;
   justify-content: space-between;
 }
+.fichier_rendu a{
+  color: #0c6cae;
+  text-decoration: none;
+  justify-content: space-evenly;
+}
 .form_new_rendu{
   height: 0;
   width: calc(90% + 20px);

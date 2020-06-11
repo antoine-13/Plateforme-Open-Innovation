@@ -22,12 +22,12 @@
     $exec = $req4->execute(array($id));
     $result4 = $req4->fetchAll();
 
-    $req5 = $db->prepare("SELECT date_fichier_rendu, fichier_rendu FROM rendu as  r INNER JOIN projet as p ON r.id_projet = p.id_projet WHERE r.id_projet = ? AND fichier_rendu IS NOT NULL");
-    $exec = $req5->execute(array($id));
+    $req5 = $db->prepare("SELECT SELECT titre_rendu, date_rendu FROM rendu WHERE id_rendu != (SELECT id_rendu FROM fichier GROUP BY id_rendu)");
+    $exec = $req5->execute();
     $result5 = $req5->fetchAll();
 
-    $req6 = $db->prepare("SELECT date_rendu, titre_rendu FROM rendu as  r INNER JOIN projet as p ON r.id_projet = p.id_projet WHERE r.id_projet = ? AND fichier_rendu IS NULL AND date_fichier_rendu IS NULL");
-    $exec = $req6->execute(array($id));
+    $req6 = $db->prepare("SELECT titre_rendu FROM rendu WHERE id_rendu = (SELECT id_rendu FROM fichier GROUP BY id_rendu)");
+    $exec = $req6->execute();
     $result6 = $req6->fetchAll();
 ?>
 
@@ -103,9 +103,9 @@
             </div>
             <div>
                 <span>Fichiers rendus :</span>
-                    <?php $test = 0; foreach($result5 as $value) {?>
+                    <?php $test = 0; foreach($result6 as $value) {?>
                         <div>
-                            <span><?php echo $value['date_fichier_rendu'] . ' '?> </span>
+                            <span><?php echo $value['titre_rendu'] . ' '?> </span>
                         </div>
                     <?php $test = $test + 1;}
                         if($test == 0){
@@ -115,7 +115,7 @@
             </div>
             <div>
                 <span>Rendus à venir :</span>
-                <?php $test = 0; foreach($result6 as $value) {?>
+                <?php $test = 0; foreach($result5 as $value) {?>
                         <div>
                             <span><?php echo 'Intitulé :  '. $value['titre_rendu'] ?></span>
                             <span><?php echo 'date limite : ' . $value['date_rendu'] . ' '?></span>
@@ -134,7 +134,7 @@
                         <div class="choix">
                             <label for="choix">Choisir rendu :</label>
                             <select name="choix" id="">
-                            <?php $req9 = $db->prepare("SELECT id_rendu, titre_rendu FROM rendu WHERE fichier_rendu IS NULL");
+                            <?php $req9 = $db->prepare("SELECT titre_rendu FROM rendu WHERE (SELECT COUNT(id_fichier) FROM fichier GROUP BY id_rendu) < 1");
                                 $exec = $req9->execute();
                                 $result9 = $req9->fetchAll();
 
@@ -156,12 +156,12 @@
                         </div>
                     </form>
 
-                    <?php
-                        
+                    <?php   
                         if($_SERVER['REQUEST_METHOD'] = 'POST'){
                             if(isset($_FILES['pictures'])){
                                 $id_rendu = $_POST['choix'];
                                 $date = date("Y-m-d");
+                                $commentaire = $_POST['commentaire'];
                                 
                                 $req11 = $db->prepare("SELECT nom_projet FROM Projet  as p INNER JOIN Rendu as r ON  p.id_projet=r.id_projet WHERE r.id_rendu = ?");
                                 $exec = $req11->execute();
@@ -177,8 +177,8 @@
                                         $destination = "files/" . $result11[0]['nom_projet'] . "\/rendu/" . $name;
                                         move_uploaded_file($tmp_name, "../". $destination);
 
-                                        $req12 = $db->prepare("INSERT INTO Fichier (destination, date_rendu, id_rendu) VALUES ?, ?, ?");
-                                        $exec = $req12->execute(array($destination, $date ,$id_rendu));
+                                        $req12 = $db->prepare("INSERT INTO Fichier (destination, date_rendu, commentaire, id_rendu) VALUES ?, ?, ?, ?");
+                                        $exec = $req12->execute(array($destination, $date , $commentaire, $id_rendu));
                                         
                                         echo "<script>alert(\"Suceed !\")</script>";
                                     }

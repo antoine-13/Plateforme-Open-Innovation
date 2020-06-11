@@ -22,12 +22,12 @@
     $exec = $req4->execute(array($id));
     $result4 = $req4->fetchAll();
 
-    $req5 = $db->prepare("SELECT date_fichier_rendu, fichier_rendu FROM rendu as  r INNER JOIN projet as p ON r.id_projet = p.id_projet WHERE r.id_projet = ? AND fichier_rendu IS NOT NULL");
-    $exec = $req5->execute(array($id));
+    $req5 = $db->prepare("SELECT titre_rendu, date_rendu FROM rendu WHERE id_rendu NOT IN (SELECT id_rendu FROM fichier GROUP BY id_rendu)");
+    $exec = $req5->execute();
     $result5 = $req5->fetchAll();
 
-    $req6 = $db->prepare("SELECT date_rendu, titre_rendu FROM rendu as  r INNER JOIN projet as p ON r.id_projet = p.id_projet WHERE r.id_projet = ? AND fichier_rendu IS NULL AND date_fichier_rendu IS NULL");
-    $exec = $req6->execute(array($id));
+    $req6 = $db->prepare("SELECT id_rendu, titre_rendu FROM rendu WHERE id_rendu IN (SELECT id_rendu FROM fichier GROUP BY id_rendu)");
+    $exec = $req6->execute();
     $result6 = $req6->fetchAll();
 ?>
 
@@ -97,7 +97,7 @@
             </div>
             <?php if ($_SESSION['type'] == "professeur") {?>
                 <div class="info-dowlnoad row">
-                    <a href="../utils/download.php?id=<?php echo $id?>">
+                    <a href="../utils/download.php?id_description=<?php echo $id?>">
                         <span><i class="fas fa-download"></i></span>
                         <h3>Telecharger les fichiers du projet</h3>
                     </a>
@@ -111,9 +111,10 @@
             </div>
             <div>
                 <span>Fichiers rendus :</span>
-                    <?php $test = 0; foreach($result5 as $value) {?>
-                        <div>
-                            <span><?php echo $value['date_fichier_rendu'] . ' '?> <a href=""><span><i class="fas fa-download"></i></span></a></span>
+                    <?php $test = 0; foreach($result6 as $value) {?>
+                        <div class="fichier_rendu">
+                            <span>Intitulé : <?php echo $value['titre_rendu'] . ' '?></span>
+                            <a href="../utils/download.php?id_rendu=<?php echo $value['id_rendu']?>"><span><i class="fas fa-download"></i>  Télecharger rendu</span></a>
                         </div>
                     <?php $test = $test + 1;}
                         if($test == 0){
@@ -123,7 +124,7 @@
             </div>
             <div>
                 <span>Rendus à venir :</span>
-                <?php $test = 0; foreach($result6 as $value) {?>
+                <?php $test = 0; foreach($result5 as $value) {?>
                         <div>
                             <span><?php echo 'Intitulé :  '. $value['titre_rendu'] ?></span>
                             <span><?php echo 'date limite : ' . $value['date_rendu'] . ' '?></span>
