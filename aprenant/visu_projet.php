@@ -203,6 +203,10 @@
                         </div>
                         <div class="row">
                             <div>
+                                <label for="email">Email :</label>
+                                <input type="email" placeholder="Votre email" name='email'></input>
+                            </div>
+                            <div>
                                 <label for="promo">Promo :</label>
                                 <select name="promo" id="">
                                     <option value="B1">B1</option>
@@ -211,10 +215,6 @@
                                     <option value="M1">M1</option>
                                     <option value="M2">M2</option>
                                 </select>
-                            </div>
-                            <div>
-                                <label for="email">Email :</label>
-                                <input type="email" placeholder="Votre email" name='email'></input>
                             </div>
                         </div>
                         
@@ -234,23 +234,36 @@
                                 $promo = $_POST['promo'];
                                 $email = $_POST['email'];
                                 
-                                $req7 = $db->prepare("SELECT COUNT(id_participant) as nbr FROM participant WHERE email = ?");
+                                $req7 = $db->prepare("SELECT id_participant, id_groupe, id_groupe_1, COUNT(id_participant) as nbr FROM participant WHERE email = ?");
                                 $exec = $req7->execute(array($email));
                                 $nbr = $req7->fetchAll();
 
-                                if($nbr_rendu[0]['nbr'] == 0){
+                                if($nbr[0]['nbr'] == 0){
                                     $req10 = $db->prepare("SELECT id_groupe FROM groupe WHERE id_projet = ?");
                                     $exec = $req10->execute(array($id));
                                     $result10 = $req10->fetchAll();
                                     $id_groupe = $result10[0]['id_groupe'];
                                     $req8 = $db->prepare("INSERT INTO participant (nom_participant, prenom_participant, promo, email, id_groupe) VALUES ('$nom', '$prenom', '$promo', '$email', '$id_groupe')");
                                     $exec = $req8->execute();
-                                    echo "<script>alert(\"Inscription réussit !\")</script>";
-                                   
-                                    
+                                    echo "<script>alert(\"Inscription réussit !\")</script>";  
+                                }
+                                else if($nbr[0]['id_groupe_1'] == NULL){
+                                    $req14 = $db->prepare("SELECT id_groupe FROM groupe WHERE id_projet = ?");
+                                    $exec = $req14->execute(array($id));
+                                    $result14 = $req14->fetchAll();
+                                    $id_groupe = $result14[0]['id_groupe'];
+
+                                    if($nbr[0]['id_groupe'] != $id_groupe){
+                                        $req13 = $db->prepare("UPDATE participant SET id_groupe_1 = ? WHERE id_participant = ?");
+                                        $exec = $req13->execute(array($id_groupe, $nbr[0]['id_participant']));
+                                        echo "<script>alert(\"Demande de changement de groupe prise en compte !\")</script>";  
+                                    }
+                                    else{
+                                        echo "<script>alert(\"Sa sert à rien de se re-inscrire au projet PIGEON !\")</script>";
+                                    }
                                 }
                                 else{
-                                    echo "<script>alert(\"Vous etes déjà inscrit !\")</script>";
+                                    echo "<script>alert(\"Une demande de changement de projet est déjà en cours !\")</script>";
                                 }
                                 
                             }

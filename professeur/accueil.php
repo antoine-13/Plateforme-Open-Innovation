@@ -71,12 +71,20 @@ if($_SESSION["type"] == "professeur"){
         </div>
         <div class="graph">
             <div class="graph-1">
-                <div class="titre-graphe"></div>
-                <div class="graphique"></div>
+                <div class="titre-graphe">
+                    <span>INSCRIPTION</span>
+                </div>
+                <div class="graphique">
+                    <canvas id="myChart"></canvas>
+                </div>
             </div>
             <div class="graph-2">
-                <div class="titre-graphe"></div>
-                <div class="graphique"></div>
+                <div class="titre-graphe">
+                    <span>% PAR PROMO</span>
+                </div>
+                <div class="graphique">
+                    <canvas id="myChart_2"></canvas>
+                </div>
             </div>
         </div>
     </div>

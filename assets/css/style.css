@@ -59,9 +59,10 @@ footer{
   justify-content: space-around;
   align-items: center;
   transition: 0.5s;
+  background: rgba(100, 89, 122, 0.5);
 }
 .container-nav.active{
-  opacity: 0;
+  opacity: 1;
 }
 .nav-etudiant{
   height: auto;
@@ -71,22 +72,17 @@ footer{
   align-items: center;
   justify-content: center;
   display: flex;
+  padding: 10px 0;
 }
 .nav-etudiant > a{
   text-decoration: none;
   font-size: 2em;
-  color: #000;
-  margin: 0 20px;
+  color: white;
+  margin: 0 30px;
 }
-.marker{
-  position: absolute;
-  height: 4px;
-  left: 0;
-  width: 0;
-  background: #000;
-  bottom: -8px;
-  transition: 0.5s;
-  border-radius: 4px;
+.nav-etudiant a span:nth-child(1){
+  margin-right: 10px;
+  font-size: 0.8em;
 }
 
 .parallax{
@@ -112,6 +108,7 @@ footer{
 .neon{
   color: #FAFAFA;
   text-shadow: 0 0 20px #ffce61;
+  text-align: center;
 }
 h1{
 
@@ -119,11 +116,10 @@ h1{
   text-transform: uppercase;
 }
 .partie_1{
-  width: calc(100% - 30px);
-  height: 50vh;
+  width: calc(100% - 60px);
+  height: auto;
   background: transparent;
-  padding-top: 20px;
-  padding-left: 30px;
+  padding: 20px 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -164,7 +160,7 @@ img{
 }
 .partie_2{
   width: 100%;
-  height: 50vh;
+  height: auto;
   margin-top: 100px;
   position: relative;
   display: flex;
@@ -173,7 +169,7 @@ img{
 
 .pres{
   width: calc(100% - 15%);
-  height: 100%;
+  height: auto;
   padding: 0 15%;
   background: transparent;
   position: absolute;
@@ -183,7 +179,7 @@ img{
 }
 .pres .img{
   width: 50%;
-  height: 100%;
+  height: 500px;
   color: #271549;
 }
 .pres .img > img{
@@ -201,7 +197,7 @@ img{
 }
 .partie_2 .pres:nth-child(1) h2{
   display: flex;
-  justify-content: flex-end;
+  justify-content: unset;
   text-align: right;
 }
 .description{
@@ -212,16 +208,17 @@ img{
 
 .partie_3{
   width: 100%;
-  height: 50vh;
+  height: auto;
   background-color: transparent;
   padding-top: 150px;
+  margin-top: 500px;
 }
 .text-part-3{
   width: 100%;
   height: auto;
   display: flex;
   justify-content: space-around;
-  
+  text-align: center;  
   
 }
 .text-part-3 span{
@@ -321,52 +318,67 @@ img{
   color: #b2b5f3;
   font-size: 30px;
 }
-
-@media (max-height: 600px) and (min-width: 530px){
-.partie_1, .partie_2, .partie_3{
-  height: 400px;
-}
-.partie_2{
-  flex-direction: column;
-}
-}
-@media (max-width: 1250px){
-  .Open-innov-logo{
-    display: none;
-
-  }
-  ul{
-    width: 100%;
-    justify-content: space-around;
+/* responsive page d'accueil des etudiants */
+@media (max-width: 1230px){
+  .pres{
+    width: 100% !important;
   }
 }
-@media (max-width: 550px){
-  li{
-    font-size: 15px;
+@media (max-width: 1200px){
+  .text_img {
+    width: 50% !important;
   }
-  h1{
-    font-size: 30px;
-  }
-  nav{
-    height: 70px;
-  }
-  .text-part-3 span{
-    font-size: 30px;
-  }
+}
+@media (max-width: 690px){
   .pres{
     flex-direction: column;
     width: 100%;
   }
-  .pres .text_img{
-    width: calc(100% - 40px);
-  }
   .pres .img{
-    width: 100%;
+    display: none;
   }
   .partie_2{
-    height: 1000px;
+    flex-direction: column;
+    margin-top: 50px;
+  }
+  .pres{
+    clip-path: inset(0% 0% 0% 0%) !important;
+    position: relative;
+    height: auto;
+    padding: 0 !important;
+    margin-bottom: 50px;
+  }
+  .pres .text_img{
+    width: calc(100% - 60px) !important;
+    padding: 0 30px;
+    margin: 0 !important;
+  }
+  .pres div:nth-child(1){
+    margin-top: 300px;
+  }
+  .partie_2 .pres:nth-child(1) h2{
+    justify-content: unset;
+  }
+  .partie_3{
+    margin: 0 !important;
+    padding-top: 50px;
   }
 }
+@media (max-width: 750px){
+  .nav-etudiant > a > span:nth-child(2){
+    display: none;
+  }
+  .nav-etudiant > a > span:nth-child(1){
+    font-size: 1em;
+  }
+  .nav-etudiant{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+}
+
 
 /*style de la page de connexion*/
 .main-index{
@@ -716,11 +728,15 @@ body{
   flex-direction: column;
 }
 .titre-graphe{
-  width: 100%;
+  width: calc(100% - 40px);
   height: 10%;
   background: #f8f9fc;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  align-items: center;
+  display: flex;
+  padding: 0 20px;
+  color: #1963a0;
 }
 .graphique{
   width: 100%;
@@ -1210,7 +1226,7 @@ body{
 
 .form-inscription input:focus{
   border-bottom: 1px solid #0c6cae;
-  width: 80%;
+  width: 70%;
 }
 
 .form-inscription form{
@@ -1367,6 +1383,12 @@ body{
   .form_new_rendu.active{
     width: calc(95% - 40px);
   }
+  .form_new_rendu_etudiant.active{
+    width: calc(95% - 40px);
+  }
+  .form-inscription.active{
+    width: calc(95% - 40px);
+  }
   .rendu > div > div{
     padding-right: 20px !important;
   }
@@ -1405,6 +1427,12 @@ body{
     width: calc(95% - 40px);
   }
   .form_new_rendu.active{
+    width: calc(95% - 40px);
+  }
+  .form_new_rendu_etudiant.active{
+    width: calc(95% - 40px);
+  }
+  .form-inscription.active{
     width: calc(95% - 40px);
   }
 }
@@ -1452,6 +1480,32 @@ body{
   }
   .actions .row div a span{
     margin: 0 !important;
+  }
+}
+@media (max-width: 790px){
+  .form-inscription .row{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .form-inscription .row:nth-child(1){
+    margin: 0;
+  }
+  .form-inscription .row:nth-child(3){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .form-inscription .row:nth-child(3) button{
+    width: 50%;
+  }
+  .form-inscription .row > div{
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 

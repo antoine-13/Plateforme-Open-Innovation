@@ -6,9 +6,9 @@ if($_SESSION["type"] == "etudiant"){
     <div class="container-nav">
         <nav class="nav-etudiant">
             <div class="marker"></div>
-            <a href="../../aprenant/accueil.php"><span><i class="fas fa-home"></i></span>Accueil</a>
-            <a href="../../aprenant/projets.php"><span><i class="fas fa-users"></i></span>Projets</a>
-            <a href="#"><span><i class="fas fa-info-circle"></i></span>Contact</a>
+            <a href="../../aprenant/accueil.php"><span><i class="fas fa-home"></i></span><span>Accueil</span></a>
+            <a href="../../aprenant/projets.php"><span><i class="fas fa-users"></i></span><span>Projets</span></a>
+            <a href="#"><span><i class="fas fa-info-circle"></i></span><span>Contact</span></a>
 
         </nav>
     </div>

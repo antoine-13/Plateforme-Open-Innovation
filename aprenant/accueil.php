@@ -25,6 +25,17 @@
         </div>
     </div>
     <div class ="partie_2">
+        <div class="pres" data-top="clip-path: inset(0% 0% 0% 100%);" data-center-center="clip-path: inset(0% 0% 0% 0%);">
+            
+            <div class="img img-1">
+                <img src="../assets/img/image_accueil_4.jpeg"></img>
+            </div>
+
+            <div class="text_img">
+                <h2 data-text='Pourquoi Open innovation'>Pourquoi Open innovation</h2>
+                <span class="description des-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id fringilla enim. In cursus bibendum nunc, at ullamcorper nibh placerat ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin tempor odio arcu, vitae finibus ex fringilla egestas. Suspendisse faucibus fringilla tortor at blandit. Nullam volutpat mollis turpis, eu aliquam felis tempor sed. Donec nec diam in enim commodo finibus et sit amet turpis. Vivamus in neque eu tellus consequat ultricies. Vestibulum sollicitudin augue scelerisque sapien suscipit, vel posuere turpis tempor.</span>
+            </div>
+        </div>
         <div class="pres" data-top="clip-path: inset(0% 0% 0% 0%);" data-center-center="clip-path: inset(0% 100% 0% 0%);">
             <div class="text_img">
                 <h2 data-text='Comment fonctionne Open Innovation'>Comment fonctionne Open Innovation</h2>
@@ -37,17 +48,7 @@
             
 
         </div>
-        <div class="pres" data-top="clip-path: inset(0% 0% 0% 100%);" data-center-center="clip-path: inset(0% 0% 0% 0%);">
-            
-            <div class="img img-1">
-                <img src="../assets/img/image_accueil_4.jpeg"></img>
-            </div>
-
-            <div class="text_img">
-                <h2 data-text='Pourquoi Open innovation'>Pourquoi Open innovation</h2>
-                <span class="description des-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id fringilla enim. In cursus bibendum nunc, at ullamcorper nibh placerat ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin tempor odio arcu, vitae finibus ex fringilla egestas. Suspendisse faucibus fringilla tortor at blandit. Nullam volutpat mollis turpis, eu aliquam felis tempor sed. Donec nec diam in enim commodo finibus et sit amet turpis. Vivamus in neque eu tellus consequat ultricies. Vestibulum sollicitudin augue scelerisque sapien suscipit, vel posuere turpis tempor.</span>
-            </div>
-        </div>
+        
     </div>
     <div class="partie_3">
         <div class="text-part-3">

@@ -47,23 +47,6 @@ if($_SESSION["type"] == "etudiant"){
                 </div>
             </div>
         <?php } ?>
-        
-        <!--<div class="tab-info-groups">
-            <div class="user">
-                <div class="right-button" onclick="swipe(this.id)" id="left"><span><i class="fas fa-caret-left"></i></span></div>
-                <div class="content">
-                    <span>Utilisateurs</span>
-                </div>
-            </div>
-
-            <div class="groups">
-                <div class="content">
-                    <span>Groupes</span>
-                </div>
-                <div class="right-button" onclick="swipe(this.id)" id="right"><span><i class="fas fa-caret-right"></i></span></div>
-            </div>
-            
-        </div>-->
     </div>
 </div>
 <?php 

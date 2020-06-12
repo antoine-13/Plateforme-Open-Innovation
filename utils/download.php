@@ -12,7 +12,7 @@
         header('Content-Transfert-Encoding: Binary');
         header('Content-disposition: attachment; filename="' . basename($url_fichier) . '"');
         echo readfile($url_fichier);
-        unset($_SESSION['id_projet']);
+        
     }
     if(!empty($_GET['id_rendu'])){
         $req = $db->prepare("SELECT destination FROM fichier WHERE id_rendu = ?");
