@@ -90,8 +90,10 @@ ALTER TABLE Participant
 ALTER TABLE Fichier
    ADD CONSTRAINT FK_id_rendu_fichier FOREIGN KEY(id_rendu) REFERENCES Rendu(id_rendu);
 
-INSERT INTO `projet` (`id_projet`, `validation`, `nom_projet`, `url_img`, `id_createur`) VALUES ('1', '1', 'verif-equation', 'files/verif-equation/image.jpg', '1');
+INSERT INTO `projet` (`id_projet`, `validation`, `nom_projet`, `url_img`) VALUES ('1', '1', 'verif-equation', 'files/verif-equation/image.jpg');
 
 INSERT INTO `description` (`id_description`, `fichier_description`, `texte_description`, `besoins`, `technos`, `etapes`, `competances`, `id_projet`) VALUES ('1', 'files/verif-equation/description.pdf', 'Verif-equation à pour but l\'entraide des etudiants dans la résolution des équations !', 'Ont à besoins de rien dans la vie ! Vivont heureux !', 'Euh disont que j\'ai pas trop réfléchit aux technos donc démerder vous !', 'Alors sa serra en 3 étapes réflexion, determination, attaque !', 'Pas besoins de compétances tout le monde est bienvenue !', '1');
 
 INSERT INTO `participant` (`id_participant`, `nom_participant`, `prenom_participant`, `promo`, `email`, `id_groupe`, `id_groupe_1`) VALUES ('1', 'Fouvry', 'Antoine', 'B1', 'antoine.fouvry@epsi.fr', '1', NULL);
+
+UPDATE `projet` SET `id_createur` = `1`;

@@ -4,6 +4,32 @@
 <!-- Coder ici -->
 <?php
 if($_SESSION["type"] == "professeur"){
+
+
+    $req5 = $db->prepare("SELECT COUNT(id_participant) AS nbr_utilisateur FROM participant WHERE promo = ?");
+    $exec = $req5->execute(array('B1'));
+    $result5 = $req5->fetchAll();
+
+    $req6 = $db->prepare("SELECT COUNT(id_participant) AS nbr_utilisateur FROM participant WHERE promo = ?");
+    $exec = $req6->execute(array('B2'));
+    $result6 = $req6->fetchAll();
+
+    $req7 = $db->prepare("SELECT COUNT(id_participant) AS nbr_utilisateur FROM participant WHERE promo = ?");
+    $exec = $req7->execute(array('B3'));
+    $result7 = $req7->fetchAll();
+
+    $req8 = $db->prepare("SELECT COUNT(id_participant) AS nbr_utilisateur FROM participant WHERE promo = ?");
+    $exec = $req8->execute(array('I1'));
+    $result8 = $req8->fetchAll();
+
+    $req9 = $db->prepare("SELECT COUNT(id_participant) AS nbr_utilisateur FROM participant WHERE promo = ?");
+    $exec = $req9->execute(array('I2'));
+    $result9 = $req9->fetchAll();
+
+    $req10 = $db->prepare("SELECT nom_projet, id_projet FROM Projet");
+    $exec = $req10->execute();
+    $result10 = $req10->fetchAll();
+    
 ?>
     <div class="main-container">
         <h1>Dashboard</h1>
@@ -75,15 +101,95 @@ if($_SESSION["type"] == "professeur"){
                     <span>INSCRIPTION</span>
                 </div>
                 <div class="graphique">
-                    <canvas id="myChart"></canvas>
+                    <canvas id="bar-chart"></canvas>
+                    <script>
+                        new Chart(document.getElementById("bar-chart"), {
+                        type: 'bar',
+                        data: {
+                        labels: ["B1", "B2", "B3", "I1", "I2"],
+                        datasets: [
+                            {
+                            label: "Incrits",
+                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                            data: [<?php echo $result5[0]['nbr_utilisateur'] . ', ' . $result6[0]['nbr_utilisateur'] . ', ' . $result7[0]['nbr_utilisateur'] . ', ' . $result8[0]['nbr_utilisateur'] . ', ' . $result9[0]['nbr_utilisateur'];?>]
+                            }
+                        ]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            },
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: 'Nombre d\'étudiant inscrit par promo'
+                            }
+                        }
+                    });
+                    </script>
                 </div>
             </div>
             <div class="graph-2">
                 <div class="titre-graphe">
-                    <span>% PAR PROMO</span>
+                    <span>PROJETS</span>
                 </div>
                 <div class="graphique">
                     <canvas id="myChart_2"></canvas>
+                    <script>
+                        var ctx_2 = document.getElementById('myChart_2').getContext('2d');
+                        var myDoughnutChart = new Chart(ctx_2, {
+                        type: 'doughnut',
+                        data: {
+                            labels: [
+                                <?php 
+                                    foreach($result10 as $value){
+                                        echo "\"". $value['nom_projet'] . "\"";
+                                    
+                                ?>
+                            ],
+                            datasets: [{
+                            label: 'Nombre',
+                            data: [
+                                <?php 
+                                    $req11 = $db->prepare('SELECT COUNT(id_participant) AS nbr FROM participant AS p INNER JOIN groupe AS g ON p.id_groupe=g.id_groupe INNER JOIN projet AS pr ON pr.id_projet=g.id_projet WHERE pr.id_projet = ?');
+                                    $exec = $req11->execute(array($value['id_projet']));
+                                    $result11 = $req11->fetchAll();
+                                    echo $result11[0]['nbr'];
+
+                                }
+                                ?>
+                            ],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgb(178, 181, 243)'
+                            ],
+                            borderColor: [
+                                'rgba(255,99,132,1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgb(178, 181, 243)'
+                            ],
+                            borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            //cutoutPercentage: 40,
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'Nombre d\'étudiant inscrit par projets'
+                            }
+                        }
+                        });
+                    </script>
                 </div>
             </div>
         </div>

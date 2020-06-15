@@ -744,6 +744,9 @@ body{
   border-bottom-right-radius: 5px;
   height: 90%;
   background: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .wrapper{
   width: calc(100% - 60px);

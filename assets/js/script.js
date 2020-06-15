@@ -9,56 +9,7 @@ function showPage() {
 }
 
 /* Graphiques avec chart.js*/
-var ctx_1 = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx_1, {
-    // The type of chart we want to create
-    type: 'line',
 
-    // The data for our dataset
-    data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            label: 'Nombre d\'inscrit',
-            backgroundColor: 'transparent',
-            borderColor: 'rgb(178, 181, 243)',
-            data: [0, 10, 5, 2, 20, 30, 45]
-        }]
-    },
-
-    // Configuration options go here
-    options: {}
-});
-var ctx_2 = document.getElementById('myChart_2').getContext('2d');
-var myDoughnutChart = new Chart(ctx_2, {
-  type: 'doughnut',
-  data: {
-    labels: ['B1', 'B2', 'B3', 'M1', 'M2'],
-    datasets: [{
-      label: '% per years',
-      data: [50, 20, 15, 10, 5],
-      backgroundColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgb(178, 181, 243)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgb(178, 181, 243)'
-      ],
-      borderWidth: 1
-    }]
-  },
-  options: {
-   	//cutoutPercentage: 40,
-    responsive: false,
-
-  }
-});
 
 /* Annimation lors du scroll avec l'extension skrollr.js */
 window.addEventListener('scroll', function(){
