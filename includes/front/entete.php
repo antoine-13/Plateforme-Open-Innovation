@@ -1,5 +1,6 @@
 <?php 
 	include_once("$_SERVER[DOCUMENT_ROOT]/includes/back/connect.php");
+	include_once("$_SERVER[DOCUMENT_ROOT]/utils/test_input.php");
 	session_start();
 	
 ?>

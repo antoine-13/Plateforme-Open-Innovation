@@ -4,8 +4,15 @@
 <!-- Coder ici -->
 
 <?php
+if(isset($_GET['id'])){
     $id = $_GET['id'];
-    $_SESSION['id_projet'] = $id;
+
+    $req9 = $db->prepare("SELECT id_projet FROM Projet");
+    $exec = $req9->execute();
+    $result9 = $req9->fetchAll();
+    
+    if(in_array($id, $result9[0])){
+    
     $req1 = $db->prepare("SELECT id_projet, nom_projet, id_createur, url_img FROM projet WHERE id_projet = ?");
     $exec = $req1->execute(array($id));
     $result1 = $req1->fetchAll();
@@ -22,7 +29,7 @@
     $exec = $req4->execute(array($id));
     $result4 = $req4->fetchAll();
 
-    $req5 = $db->prepare("SELECT titre_rendu, date_rendu FROM rendu WHERE id_rendu NOT IN (SELECT id_rendu FROM fichier GROUP BY id_rendu)");
+    $req5 = $db->prepare("SELECT id_rendu, titre_rendu, date_rendu FROM rendu WHERE id_rendu NOT IN (SELECT id_rendu FROM fichier GROUP BY id_rendu)");
     $exec = $req5->execute();
     $result5 = $req5->fetchAll();
 
@@ -134,11 +141,8 @@
                         <div class="choix">
                             <label for="choix">Choisir rendu :</label>
                             <select name="choix" id="">
-                            <?php $req9 = $db->prepare("SELECT titre_rendu FROM rendu WHERE (SELECT COUNT(id_fichier) FROM fichier GROUP BY id_rendu) < 1");
-                                $exec = $req9->execute();
-                                $result9 = $req9->fetchAll();
-
-                                foreach($result9 as $result){ ?>
+                            <?php 
+                                foreach($result5 as $result){ ?>
                                 <option value="<?php echo $result['id_rendu']?>"><?php echo $result['titre_rendu']?></option>
                                 <?php }
                             
@@ -146,7 +150,7 @@
                             </select>
                         </div>
                         <div class="drop-zone">
-                            <input type="file" name="pictures[]" multiple="" id="file" is="drop-files"/>
+                            <input type="file" name="pictures[]" multiple="" id="file" is="drop-files" accept="image/png, .jpeg, .jpg, image/gif, .zip"/>
                         </div>
                         <div class ="choix">
                             <input type="text" placeholder="Commentaires" name='commentaire'></input>
@@ -161,26 +165,41 @@
                             if(isset($_FILES['pictures'])){
                                 $id_rendu = $_POST['choix'];
                                 $date = date("Y-m-d");
-                                $commentaire = $_POST['commentaire'];
+                                $commentaire = test_input($_POST['commentaire']);
                                 
                                 $req11 = $db->prepare("SELECT nom_projet FROM Projet  as p INNER JOIN Rendu as r ON  p.id_projet=r.id_projet WHERE r.id_rendu = ?");
-                                $exec = $req11->execute();
+                                $exec = $req11->execute(array($id_rendu));
                                 $result11 = $req11->fetchAll();
 
                                 foreach ($_FILES["pictures"]["error"] as $key => $error) {
                                     if ($error == UPLOAD_ERR_OK) {
                                         $tmp_name = $_FILES["pictures"]["tmp_name"][$key];
-                    
-                                        // basename() peut empêcher les attaques "filesystem traversal";
-                                        // une autre validation/néttoyage du nom de fichier peux être appropriée
-                                        $name = basename($_FILES["pictures"]["name"][$key]);
-                                        $destination = "files/" . $result11[0]['nom_projet'] . "\/rendu/" . $name;
-                                        move_uploaded_file($tmp_name, "../". $destination);
+                                        $newName = bin2hex(random_bytes(10));
 
-                                        $req12 = $db->prepare("INSERT INTO Fichier (destination, date_rendu, commentaire, id_rendu) VALUES ?, ?, ?, ?");
-                                        $exec = $req12->execute(array($destination, $date , $commentaire, $id_rendu));
-                                        
-                                        echo "<script>alert(\"Suceed !\")</script>";
+                                        // On crée un tableau avec les extensions autorisées
+                                        $legalExtensions = array("jpg", "png", "zip", "txt", "gif");
+
+                                        // On récupère l'extension du fichier soumis et on vérifie qu'elle soit dans notre tableau
+                                        $extension = strtolower(pathinfo($_FILES['pictures']['name'][$key], PATHINFO_EXTENSION));
+
+                                        $destination = "files/" . $result11[0]['nom_projet'] . "\/rendu/" . $newName . "." . $extension;
+
+                                        if (in_array($extension, $legalExtensions)) {
+                                            if (file_exists($destination)) {
+                                                echo "<script>alert(\"Erreur lors de l'upload !\")</script>";
+                                            }
+                                            else{
+                                                move_uploaded_file($tmp_name, "../". $destination);
+
+                                                $req12 = $db->prepare("INSERT INTO Fichier (destination, date_rendu, commentaire, id_rendu) VALUES ('$destination', '$date', '$commentaire', '$id_rendu');");
+                                                $exec = $req12->execute();
+                                                
+                                                echo "<script>alert(\"Suceed !\")</script>";
+                                            }
+                                        }
+                                        else{
+                                            echo "<script>alert(\"Merci de choisir des fichiers valides (jpg, png, zip, txt) !\")</script>";
+                                        }
                                     }
                                 }
                             }
@@ -212,8 +231,8 @@
                                     <option value="B1">B1</option>
                                     <option value="B2">B2</option>
                                     <option value="B3">B3</option>
-                                    <option value="M1">M1</option>
-                                    <option value="M2">M2</option>
+                                    <option value="I1">I1</option>
+                                    <option value="I2">I2</option>
                                 </select>
                             </div>
                         </div>
@@ -229,10 +248,10 @@
                         if($_SERVER['REQUEST_METHOD'] = 'POST'){
                             if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['promo']) && !empty($_POST['email'])){
                                 
-                                $nom = $_POST['nom'];
-                                $prenom = $_POST['prenom'];
-                                $promo = $_POST['promo'];
-                                $email = $_POST['email'];
+                                $nom = test_input(strtolower($_POST['nom']));
+                                $prenom = test_input(strtolower($_POST['prenom']));
+                                $promo = test_input($_POST['promo']);
+                                $email = test_input($_POST['email']);
                                 
                                 $req7 = $db->prepare("SELECT id_participant, id_groupe, id_groupe_1, COUNT(id_participant) as nbr FROM participant WHERE email = ?");
                                 $exec = $req7->execute(array($email));
@@ -245,6 +264,23 @@
                                     $id_groupe = $result10[0]['id_groupe'];
                                     $req8 = $db->prepare("INSERT INTO participant (nom_participant, prenom_participant, promo, email, id_groupe) VALUES ('$nom', '$prenom', '$promo', '$email', '$id_groupe')");
                                     $exec = $req8->execute();
+
+                                    $req15 = $db->prepare("SELECT nom_projet FROM Projet WHERE id_projet = ?");
+                                    $exec = $req15->execute(array($id));
+                                    $result15 = $req15->fetchAll();
+
+                                    ini_set( 'display_errors', 1 );
+                                    error_reporting( E_ALL );
+                                    
+
+                                    // Le message
+                                    $message = "Bienvenue " . $prenom . ",\nVous etes maintenant inscrit sur le projet " . $result15[0]['nom_projet'];
+                                    $subject = "Bienvenue " . $prenom . " !";
+                                    // Dans le cas où nos lignes comportent plus de 70 caractères, nous les coupons en utilisant wordwrap()
+                                    $message = wordwrap($message, 70);
+                                    
+                                    mail($email,$subject,$message);
+
                                     echo "<script>alert(\"Inscription réussit !\")</script>";  
                                 }
                                 else if($nbr[0]['id_groupe_1'] == NULL){
@@ -256,6 +292,17 @@
                                     if($nbr[0]['id_groupe'] != $id_groupe){
                                         $req13 = $db->prepare("UPDATE participant SET id_groupe_1 = ? WHERE id_participant = ?");
                                         $exec = $req13->execute(array($id_groupe, $nbr[0]['id_participant']));
+
+                                        $req15 = $db->prepare("SELECT nom_projet FROM Projet WHERE id_projet = ?");
+                                        $exec = $req15->execute(array($id));
+                                        $result15 = $req15->fetchAll();
+                                         // Le message
+                                        $message = "Bonjour " . $prenom . ",\nVotre demande de changement de projet vers le projet " . $result15[0]['nom_projet'] . " à bien été prise en compte !\n Elle doit maintenant etre accepter.";
+                                        $subject = "Demande de changement de projet";
+                                        // Dans le cas où nos lignes comportent plus de 70 caractères, nous les coupons en utilisant wordwrap()
+                                        $message = wordwrap($message, 70);
+                                        
+                                        mail($email,$subject,$message);
                                         echo "<script>alert(\"Demande de changement de groupe prise en compte !\")</script>";  
                                     }
                                     else{
@@ -286,7 +333,16 @@
         </div>
     </div>
 </div>
-
+<?php
+    }
+    else{
+        header('Location: projets.php');
+    }
+}
+else{
+    header('Location: projets.php');
+}
+?>
 
 <!-- include du footer -->
 <?php include_once("../includes/front/footer.php") ?>

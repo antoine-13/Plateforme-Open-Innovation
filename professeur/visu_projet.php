@@ -4,8 +4,16 @@
 <!-- Coder ici -->
 
 <?php
+if(isset($_GET['id'])){
     $id = $_GET['id'];
-    $_SESSION['id_projet'] = $id;
+
+    $req9 = $db->prepare("SELECT id_projet FROM Projet");
+    $exec = $req9->execute();
+    $result9 = $req9->fetchAll();
+
+    if(in_array($id, $result9[0])){
+
+    
     $req1 = $db->prepare("SELECT id_projet, nom_projet, id_createur, url_img FROM projet WHERE id_projet = ?");
     $exec = $req1->execute(array($id));
     $result1 = $req1->fetchAll();
@@ -163,8 +171,8 @@
                         if($_SERVER['REQUEST_METHOD'] = 'POST'){
                             if(!empty($_POST['date']) && !empty($_POST['titre']) && !empty($_POST['travail'])){
                                 $date = $_POST['date'];
-                                $titre = $_POST['titre'];
-                                $consignes = $_POST['travail'];
+                                $titre = test_input($_POST['titre']);
+                                $consignes = test_input($_POST['travail']);
                                 
                                 $req7 = $db->prepare("SELECT COUNT(id_rendu) as nbr_rendu FROM rendu WHERE titre_rendu = ?");
                                 $exec = $req7->execute(array($titre));
@@ -174,6 +182,21 @@
                                 if($nbr_rendu[0]['nbr_rendu'] == 0){
                                     $req8 = $db->prepare("INSERT INTO rendu (date_rendu, titre_rendu, consignes, id_projet) VALUES ('$date', '$titre', '$consignes', '$id')");
                                     $exec = $req8->execute();
+
+                                    $req10 = $db->prepare("SELECT email, prenom_participant FROM Participant AS p INNER JOIN Groupe AS g ON p.id_groupe=g.id_groupe INNER JOIN Projet AS pr ON pr.id_projet=g.id_projet WHERE pr.id_projet = ? ");
+                                    $exec = $req10->execute(array($id));
+                                    $result10 = $req10->fetchAll();
+
+                                    foreach($result10 as $value){
+                                        // Le message
+                                        $message = "Bonjour " . $value['prenom_participant'] . ",\nUn nouveau rendu est demandé ! Les consignes sont les suivantes : " . $consignes . ". Ce travail sera à rendre à la date limite du " . $date .".";
+                                        $subject = "Nouveau rendu";
+                                        // Dans le cas où nos lignes comportent plus de 70 caractères, nous les coupons en utilisant wordwrap()
+                                        $message = wordwrap($message, 70);
+                                        
+                                        mail($value['email'],$subject,$message);
+                                    }
+                                    echo "<script>alert(\"Rendu crée avec succès !\")</script>";
                                     
                                 }
                                 else{
@@ -199,7 +222,16 @@
         </div>
     </div>
 </div>
-
+<?php
+    }
+    else{
+        header('Location: projets.php');
+    }
+}
+else{
+    header('Location: projets.php');
+}
+?>
 
 <!-- include du footer -->
 <?php include_once("../includes/front/footer.php") ?>

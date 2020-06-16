@@ -106,14 +106,29 @@ if($_SESSION["type"] == "professeur"){
                         new Chart(document.getElementById("bar-chart"), {
                         type: 'bar',
                         data: {
-                        labels: ["B1", "B2", "B3", "I1", "I2"],
-                        datasets: [
-                            {
-                            label: "Incrits",
-                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                            data: [<?php echo $result5[0]['nbr_utilisateur'] . ', ' . $result6[0]['nbr_utilisateur'] . ', ' . $result7[0]['nbr_utilisateur'] . ', ' . $result8[0]['nbr_utilisateur'] . ', ' . $result9[0]['nbr_utilisateur'];?>]
-                            }
-                        ]
+                            labels: [
+                                    <?php 
+                                        foreach($result10 as $value){
+                                            echo "\"". $value['nom_projet'] . "\",";
+                                        }
+                                    ?>
+                            ],
+                            datasets: [
+                                {
+                                label: "Incrits",
+                                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                                data: [
+                                    <?php
+                                    foreach($result10 as $value){
+                                        $req11 = $db->prepare('SELECT COUNT(id_participant) AS nbr FROM participant AS p INNER JOIN groupe AS g ON p.id_groupe=g.id_groupe INNER JOIN projet AS pr ON pr.id_projet=g.id_projet WHERE pr.id_projet = ?');
+                                        $exec = $req11->execute(array($value['id_projet']));
+                                        $result11 = $req11->fetchAll();
+                                        echo $result11[0]['nbr'] . ", ";
+                                    }
+                                    ?>
+                                ]
+                                }
+                            ]
                         },
                         options: {
                             scales: {
@@ -144,24 +159,11 @@ if($_SESSION["type"] == "professeur"){
                         var myDoughnutChart = new Chart(ctx_2, {
                         type: 'doughnut',
                         data: {
-                            labels: [
-                                <?php 
-                                    foreach($result10 as $value){
-                                        echo "\"". $value['nom_projet'] . "\"";
-                                    
-                                ?>
-                            ],
+                            labels: ["B1", "B2", "B3", "I1", "I2"],
                             datasets: [{
                             label: 'Nombre',
                             data: [
-                                <?php 
-                                    $req11 = $db->prepare('SELECT COUNT(id_participant) AS nbr FROM participant AS p INNER JOIN groupe AS g ON p.id_groupe=g.id_groupe INNER JOIN projet AS pr ON pr.id_projet=g.id_projet WHERE pr.id_projet = ?');
-                                    $exec = $req11->execute(array($value['id_projet']));
-                                    $result11 = $req11->fetchAll();
-                                    echo $result11[0]['nbr'];
-
-                                }
-                                ?>
+                                <?php echo $result5[0]['nbr_utilisateur'] . ', ' . $result6[0]['nbr_utilisateur'] . ', ' . $result7[0]['nbr_utilisateur'] . ', ' . $result8[0]['nbr_utilisateur'] . ', ' . $result9[0]['nbr_utilisateur'];?>
                             ],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 1)',

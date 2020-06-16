@@ -1,0 +1,4 @@
+erreur visu projet --> quand pas de projet dans la bdd -- done
+projet.php --> message quand pas de projets -- done
+tache planifié crontab --> envoi email automatique pour les rendu 
+inverser les deux graph 

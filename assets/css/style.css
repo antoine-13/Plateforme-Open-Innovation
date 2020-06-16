@@ -759,6 +759,14 @@ body{
   padding-left: 30px;
   padding-right: 30px;
 }
+.wrapper .div-error{
+  padding-top: 30px;
+  padding-left: 20px;
+}
+.wrapper .error{
+  color: #9d0208;
+  font-size: xx-large;
+}
 .wrapper > .card{
   position: relative;
   margin-top: 80px;
