@@ -1548,6 +1548,36 @@ body{
   
 }
 
+/* Style de la page de validation */
+.tab_validation{
+  padding: 30px 70px;
+}
+.demande{
+  padding: 10px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+.demande div span{
+  font-size: 25px;
+}
+.demande div:nth-child(2){
+  width: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.demande .fa-check{
+  color: green;
+}
+.demande .fa-times{
+  color: red;
+}
+.demande .fa-download{
+  color: blue;
+}
+
 /* Style scroll Bar */
 ::-webkit-scrollbar{
   width: 12px;

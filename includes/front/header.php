@@ -27,7 +27,7 @@ if($_SESSION["type"] == "professeur"){
         <ul>
             <li><a href="../../professeur/accueil.php"><span><i class="fas fa-home"></i></span>Home</a></li>
             <li><a href="../../professeur/projets.php"><span><i class="fas fa-users"></i></span>Projets</a></li>
-            <li><a href=""><span><i class="fas fa-clipboard-check"></i></span>Validation</a></li>
+            <li><a href="../../professeur/validation.php"><span><i class="fas fa-clipboard-check"></i></span>Validation</a></li>
         </ul>
         <span>Copyright &copy; FOUVRY</span>
 
