@@ -13,8 +13,8 @@ CREATE TABLE Projet(
    id_projet INT NOT NULL AUTO_INCREMENT,
    validation boolean NOT NULL,
    nom_projet VARCHAR(50) NOT NULL,
-   url_img varchar(50) NOT NULL,
-   id_createur INT NOT NULL,
+   url_img varchar(50),
+   id_createur INT,
    PRIMARY KEY(id_projet)
 );
 
