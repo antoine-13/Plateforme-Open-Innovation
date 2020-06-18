@@ -197,6 +197,7 @@ if(isset($_GET['id'])){
                                         mail($value['email'],$subject,$message);
                                     }
                                     echo "<script>alert(\"Rendu crée avec succès !\")</script>";
+                                    header("Refresh:0");
                                     
                                 }
                                 else{
@@ -215,7 +216,7 @@ if(isset($_GET['id'])){
                         <a class="button" onclick="new_rendu_professeur()"><span>Nouveau rendu</span><span><i class="fas fa-plus-square"></i></span></a>
                     </div>
                     <div class="supp">
-                        <a href="../../delete.php?id=<?php echo $id?>" class="button" ><span>Supprimer le projet</span><span><i class="fas fa-trash"></i></span></a>
+                        <a href="../utils/delete.php?id=<?php echo $id?>" class="button" ><span>Supprimer le projet</span><span><i class="fas fa-trash"></i></span></a>
                     </div>
                 </div>
             <?php }?>

@@ -1,7 +1,6 @@
 
 <script src="../../assets/js/all.js"></script>
-
-<script type="module" src="//unpkg.com/@grafikart/drop-files-element"></script>
+<script type="module" src="../../assets/js/drop-file.js"></script>
 <script src="../../assets/js/script.js"></script>
 <script type="text/javascript" src="../../assets/js/skrollr.js"></script>
 <script type="text/javascript">
