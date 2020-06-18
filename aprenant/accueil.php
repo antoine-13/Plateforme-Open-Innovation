@@ -15,7 +15,7 @@
     </div>
 
     <div class="partie_1">
-        <div class="titre">
+        <div>
             <h2 data-text="Qu'est-ce que le projet Open Innovation ?">Qu'est-ce que le projet Open Innovation ?</h2>
         </div>
         <div class="main_pres">
@@ -60,7 +60,7 @@
                 <a href="projets.php" class="button" data-5-end="left: 0; " data-bottom-top="left: 200px;" >Rejoindre</a>
             </div>
             <div class="row center">
-                <a href="#" class="button" data-5-end="top: 0; " data-bottom-top="top: 200px;" >Contact</a>
+                <a href="mailto:claire.perrot@campus-cd.com" class="button" data-5-end="top: 0; " data-bottom-top="top: 200px;">Contact</a>
             </div>
         </div>
     </div>

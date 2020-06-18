@@ -1,22 +1,21 @@
 <!-- include du header -->
-<?php include_once("../includes/front/header.php");
-
-$req1 = $db->prepare("SELECT id_projet, nom_projet FROM Projet WHERE validation = 0");
-$exec = $req1->execute();
-$result1 = $req1->fetchAll();
-
-$req3 = $db->prepare("SELECT id_participant, nom_participant, prenom_participant, id_groupe, id_groupe_1 FROM Participant WHERE id_groupe_1 IS NOT NULL");
-$exec = $req3->execute();
-$result3 = $req3->fetchAll();
-
-?>
+<?php include_once("../includes/front/header.php");?>
 
 <!-- Coder ici -->
-<?php if($_SESSION['type'] = 'professeur'){ ?>
+<?php if($_SESSION['type'] = 'professeur'){
+    $req1 = $db->prepare("SELECT id_projet, nom_projet FROM Projet WHERE validation = 0");
+    $exec = $req1->execute();
+    $result1 = $req1->fetchAll();
+
+    $req3 = $db->prepare("SELECT id_participant, nom_participant, prenom_participant, id_groupe, id_groupe_1 FROM Participant WHERE id_groupe_1 IS NOT NULL");
+    $exec = $req3->execute();
+    $result3 = $req3->fetchAll();  
+?>
+
 <div class="main-container">
     <h1>Validation</h1>
     <div class="tab_validation">
-        <?php if(!empty($result1) && !empty($result3)){?>
+        <?php if(!empty($result1) || !empty($result3)){?>
             <?php foreach($result1 as $value){?>
                 <div class="demande">
                     <div>

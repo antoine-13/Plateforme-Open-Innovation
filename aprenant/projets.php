@@ -10,6 +10,7 @@
 if($_SESSION["type"] == "etudiant"){
 ?>
 <div class="main-container-aprenant">
+    <div class="gotop" onclick="gotop()"><span><i class="fas fa-arrow-up"></i></span></div>
     <h1>Projets</h1>
     <div class="wrapper">
         <?php 
@@ -65,6 +66,9 @@ if($_SESSION["type"] == "etudiant"){
         <?php
         }   
         ?>
+    </div>
+    <div class="new_projet">
+        <a class="button" href="creation.php"><span>Nouveau projet</span><span><i class="fas fa-plus-circle"></i></span></a>
     </div>
 </div>
 <?php 

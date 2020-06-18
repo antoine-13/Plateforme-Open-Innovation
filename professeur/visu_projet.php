@@ -26,7 +26,7 @@ if(isset($_GET['id'])){
     $exec = $req3->execute(array($id));
     $result3 = $req3->fetchAll();
 
-    $req4 = $db->prepare("SELECT texte_description, besoins, technos, etapes, competances  FROM description as  d INNER JOIN projet as p ON d.id_projet = p.id_projet WHERE d.id_projet = ?");
+    $req4 = $db->prepare("SELECT texte_description, besoins, technos, etapes, competences  FROM description as  d INNER JOIN projet as p ON d.id_projet = p.id_projet WHERE d.id_projet = ?");
     $exec = $req4->execute(array($id));
     $result4 = $req4->fetchAll();
 
@@ -101,7 +101,7 @@ if(isset($_GET['id'])){
             </div>
             <div>
                 <h3>Quelles sont les compétences attendues pour ce projet ?</h3>
-                <p><?php echo $result4[0]['competances']?></p>
+                <p><?php echo $result4[0]['competences']?></p>
             </div>
             <?php if ($_SESSION['type'] == "professeur") {?>
                 <div class="info-dowlnoad row">

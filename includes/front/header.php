@@ -8,6 +8,7 @@ if($_SESSION["type"] == "etudiant"){
             <div class="marker"></div>
             <a href="../../aprenant/accueil.php"><span><i class="fas fa-home"></i></span><span>Accueil</span></a>
             <a href="../../aprenant/projets.php"><span><i class="fas fa-users"></i></span><span>Projets</span></a>
+            <a href="../../aprenant/creation.php"><span><i class="fas fa-plus"></i></span><span>Creation projet</span></a>
             <a href="mailto:claire.perrot@campus-cd.com"><span><i class="fas fa-info-circle"></i></span><span>Contact</span></a>
 
         </nav>

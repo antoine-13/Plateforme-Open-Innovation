@@ -25,7 +25,7 @@ if(isset($_GET['id'])){
     $exec = $req3->execute(array($id));
     $result3 = $req3->fetchAll();
 
-    $req4 = $db->prepare("SELECT texte_description, besoins, technos, etapes, competances  FROM description as  d INNER JOIN projet as p ON d.id_projet = p.id_projet WHERE d.id_projet = ?");
+    $req4 = $db->prepare("SELECT texte_description, besoins, technos, etapes, competences  FROM description as  d INNER JOIN projet as p ON d.id_projet = p.id_projet WHERE d.id_projet = ?");
     $exec = $req4->execute(array($id));
     $result4 = $req4->fetchAll();
 
@@ -100,7 +100,7 @@ if(isset($_GET['id'])){
             </div>
             <div>
                 <h3>Quelles sont les compétences attendues pour ce projet ?</h3>
-                <p><?php echo $result4[0]['competances']?></p>
+                <p><?php echo $result4[0]['competences']?></p>
             </div>
         </div>
         <div class="rendu">
@@ -150,7 +150,7 @@ if(isset($_GET['id'])){
                             </select>
                         </div>
                         <div class="drop-zone">
-                            <input type="file" name="pictures[]" multiple="" id="file" is="drop-files" accept="image/png, .jpeg, .jpg, image/gif, .zip"/>
+                            <input type="file" name="docs[]" multiple="" id="file" is="drop-files" accept=".pdf, .zip, .txt"/>  
                         </div>
                         <div class ="choix">
                             <input type="text" placeholder="Commentaires" name='commentaire'></input>
@@ -162,7 +162,7 @@ if(isset($_GET['id'])){
 
                     <?php   
                         if($_SERVER['REQUEST_METHOD'] = 'POST'){
-                            if(isset($_FILES['pictures'])){
+                            if(isset($_FILES['docs'])){
                                 $id_rendu = $_POST['choix'];
                                 $date = date("Y-m-d");
                                 $commentaire = test_input($_POST['commentaire']);
@@ -171,16 +171,16 @@ if(isset($_GET['id'])){
                                 $exec = $req11->execute(array($id_rendu));
                                 $result11 = $req11->fetchAll();
 
-                                foreach ($_FILES["pictures"]["error"] as $key => $error) {
+                                foreach ($_FILES["docs"]["error"] as $key => $error) {
                                     if ($error == UPLOAD_ERR_OK) {
-                                        $tmp_name = $_FILES["pictures"]["tmp_name"][$key];
+                                        $tmp_name = $_FILES["docs"]["tmp_name"][$key];
                                         $newName = bin2hex(random_bytes(10));
 
                                         // On crée un tableau avec les extensions autorisées
-                                        $legalExtensions = array("jpg", "png", "zip", "txt", "gif");
+                                        $legalExtensions = array("zip", "txt", "pdf");
 
                                         // On récupère l'extension du fichier soumis et on vérifie qu'elle soit dans notre tableau
-                                        $extension = strtolower(pathinfo($_FILES['pictures']['name'][$key], PATHINFO_EXTENSION));
+                                        $extension = strtolower(pathinfo($_FILES['docs']['name'][$key], PATHINFO_EXTENSION));
 
                                         $destination = "files/" . $result11[0]['nom_projet'] . "\/rendu/" . $newName . "." . $extension;
 
@@ -195,10 +195,12 @@ if(isset($_GET['id'])){
                                                 $exec = $req12->execute();
                                                 
                                                 echo "<script>alert(\"Suceed !\")</script>";
+                                                header("Refresh:0");
                                             }
                                         }
                                         else{
-                                            echo "<script>alert(\"Merci de choisir des fichiers valides (jpg, png, zip, txt) !\")</script>";
+                                            echo "<script>alert(\"Merci de choisir des fichiers valides (zip, txt, pdf) !\")</script>";
+                                            header("Refresh:0");
                                         }
                                     }
                                 }

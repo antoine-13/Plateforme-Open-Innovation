@@ -1,14 +1,17 @@
 /* Ecran de chargement des pages */
 var myVar;
+
+
 function loadFunction() {
+  window.scrollTo(0,0);
+  document.documentElement.style.overflow = 'hidden';
   myVar = setTimeout(showPage, 1000);
 }
 function showPage() {
   document.getElementById("loader-wrapper").style.display = "none";
-  document.querySelector("main").style.display = "block";
+  document.documentElement.style.overflow = 'visible';
 }
 
-/* Graphiques avec chart.js*/
 
 
 /* Annimation lors du scroll avec l'extension skrollr.js */
