@@ -543,6 +543,9 @@ img{
   .valid-form{
     margin-top: 30px;
   }
+  .div-input{
+    margin-top: 40px;
+  }
 }
 /* Syle de la page d'accueil des professeurs */
 .sidebar{
