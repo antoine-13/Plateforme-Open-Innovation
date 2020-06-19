@@ -131,6 +131,7 @@ if($_SESSION["type"] == "professeur"){
                             ]
                         },
                         options: {
+                            responsive: true,
                             scales: {
                                 yAxes: [{
                                     ticks: {

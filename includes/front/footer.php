@@ -1,11 +1,9 @@
-
-    
+ 
     <?php if($_SESSION['type'] == "etudiant"){ ?>
     <footer>
         <span> Copyright &copy; FOUVRY</span>
     </footer>
     <?php } ?>
-
 
     <div class="loader-wrapper" id="loader-wrapper">
         <div class="wrapper-img">
