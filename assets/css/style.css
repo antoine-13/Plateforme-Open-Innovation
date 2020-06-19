@@ -535,7 +535,15 @@ img{
     margin: 0 !important;
   }
 }
-
+@media (max-height: 700px){
+  .connect-form-div form{
+    margin: 20px 0 20px 0;
+    height: calc(100% - 80px);
+  }
+  .valid-form{
+    margin-top: 30px;
+  }
+}
 /* Syle de la page d'accueil des professeurs */
 .sidebar{
   width: 15%;
