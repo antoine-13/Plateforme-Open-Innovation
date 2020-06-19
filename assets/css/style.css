@@ -381,7 +381,7 @@ img{
 
 
 /*style de la page de connexion*/
-.main-index{
+.body-index{
   background-image: url(../img/bg-index.png);
   background-size: cover;
   background-repeat: no-repeat;
