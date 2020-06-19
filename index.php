@@ -1,6 +1,16 @@
-<!-- include de l'entete -->
-<?php include_once("includes/front/entete.php"); ?>
-
+<?php 
+	session_start();
+?>
+<html lang="FR-fr">
+<head>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../assets/css/style.css">
+	<link rel="icon" href="assets/img/favicon.png" />
+	<title>Open Innov</title>
+</head>
+<body>
 	<main class="main-index">
 		<div class="connect-form-div">
 			<form action="" method="POST">
@@ -35,23 +45,22 @@
 		</div>
 	</main>
 
-<?php 
-if($_SERVER['REQUEST_METHOD'] = 'POST'){
-	if(!empty($_POST['password']) && !empty($_POST['username'])){
-		if($_POST['password'] == 'etudiant' and $_POST['username'] == 'etudiant'){ 
-			$_SESSION["type"] = "etudiant";
-			header('location: /aprenant/accueil.php');
-			
+	<?php 
+	if($_SERVER['REQUEST_METHOD'] = 'POST'){
+		if(!empty($_POST['password']) && !empty($_POST['username'])){
+			if($_POST['password'] == 'etudiant' and $_POST['username'] == 'etudiant'){ 
+				$_SESSION["type"] = "etudiant";
+				header('location: /aprenant/accueil.php');
+				
+			}
+			elseif($_POST['password'] == 'professeur' and $_POST['username'] == 'professeur'){
+				$_SESSION["type"] = "professeur";
+				header('location: /professeur/accueil.php');
+			}
 		}
-		elseif($_POST['password'] == 'professeur' and $_POST['username'] == 'professeur'){
-			$_SESSION["type"] = "professeur";
-			header('location: /professeur/accueil.php');
-		}
+
 	}
-
-}
-?>
-
-<!-- include de la fin du fichier -->
-<?php include_once("includes/front/fin.php"); ?>
+	?>
+</body>
+</html>
 
