@@ -25,7 +25,7 @@ CREATE TABLE Description(
    besoins TEXT(5000),
    technos TEXT(5000),
    etapes TEXT(5000),
-   competances TEXT(5000),
+   competences TEXT(5000),
    id_projet INT NOT NULL,
    PRIMARY KEY(id_description)
 );
@@ -94,6 +94,8 @@ INSERT INTO `projet` (`id_projet`, `validation`, `nom_projet`, `url_img`) VALUES
 
 INSERT INTO `description` (`id_description`, `fichier_description`, `texte_description`, `besoins`, `technos`, `etapes`, `competances`, `id_projet`) VALUES ('1', 'files/verif-equation/description.pdf', 'Verif-equation à pour but l\'entraide des etudiants dans la résolution des équations !', 'Ont à besoins de rien dans la vie ! Vivont heureux !', 'Euh disont que j\'ai pas trop réfléchit aux technos donc démerder vous !', 'Alors sa serra en 3 étapes réflexion, determination, attaque !', 'Pas besoins de compétances tout le monde est bienvenue !', '1');
 
+INSERT INTO `Groupe` (`id_groupe`, `numero_groupe`, `id_projet`) VALUES ('1', '1', '1');
+
 INSERT INTO `participant` (`id_participant`, `nom_participant`, `prenom_participant`, `promo`, `email`, `id_groupe`, `id_groupe_1`) VALUES ('1', 'Fouvry', 'Antoine', 'B1', 'antoine.fouvry@epsi.fr', '1', NULL);
 
-UPDATE `projet` SET `id_createur` = `1`;
+UPDATE `projet` SET `id_createur` = '1';

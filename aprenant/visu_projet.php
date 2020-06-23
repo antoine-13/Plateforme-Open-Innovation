@@ -173,7 +173,10 @@ if(isset($_GET['id'])){
 
                                 foreach ($_FILES["docs"]["error"] as $key => $error) {
                                     if ($error == UPLOAD_ERR_OK) {
+                                        // destination temporaire du fichier
                                         $tmp_name = $_FILES["docs"]["tmp_name"][$key];
+
+                                        // Nouveau nom que l'on va donner au fichier
                                         $newName = bin2hex(random_bytes(10));
 
                                         // On crée un tableau avec les extensions autorisées
@@ -182,30 +185,35 @@ if(isset($_GET['id'])){
                                         // On récupère l'extension du fichier soumis et on vérifie qu'elle soit dans notre tableau
                                         $extension = strtolower(pathinfo($_FILES['docs']['name'][$key], PATHINFO_EXTENSION));
 
+                                        // destination finale du fichier
                                         $destination = "files/" . $result11[0]['nom_projet'] . "\/rendu/" . $newName . "." . $extension;
 
+                                        // Si le fichier à la bonne extension
                                         if (in_array($extension, $legalExtensions)) {
-                                            if (file_exists($destination)) {
+                                            if (file_exists($destination)) { // si le fichier existe déjà
                                                 echo "<script>alert(\"Erreur lors de l'upload !\")</script>";
                                             }
-                                            else{
+                                            else{ // si le fichier n'existe pas déjà
+                                                // On deplace le fichier vers la destination souhaitez
                                                 move_uploaded_file($tmp_name, "../". $destination);
 
+                                                // On ajoute cette destination à la base de données 
                                                 $req12 = $db->prepare("INSERT INTO Fichier (destination, date_rendu, commentaire, id_rendu) VALUES ('$destination', '$date', '$commentaire', '$id_rendu');");
                                                 $exec = $req12->execute();
                                                 
+                                                //On affiche un message de réussite 
                                                 echo "<script>alert(\"Suceed !\")</script>";
                                                 header("Refresh:0");
                                             }
                                         }
-                                        else{
+                                        else{ //si le fichier n'a pas une extension valide 
+                                            // On l'indique à l'utilisateur
                                             echo "<script>alert(\"Merci de choisir des fichiers valides (zip, txt, pdf) !\")</script>";
                                             header("Refresh:0");
                                         }
                                     }
                                 }
                             }
-
                         }
                     ?>
         </div>

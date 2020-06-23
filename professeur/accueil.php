@@ -103,49 +103,50 @@ if($_SESSION["type"] == "professeur"){
                 <div class="graphique">
                     <canvas id="bar-chart"></canvas>
                     <script>
+                        // Nouveau graphique
                         new Chart(document.getElementById("bar-chart"), {
-                        type: 'bar',
-                        data: {
-                            labels: [
-                                    <?php 
+                            type: 'bar',
+                            data: {
+                                labels: [
+                                        <?php 
+                                            foreach($result10 as $value){
+                                                echo "\"". $value['nom_projet'] . "\",";
+                                            }
+                                        ?>
+                                ],
+                                datasets: [
+                                    {
+                                    label: "Incrits",
+                                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                                    data: [
+                                        <?php
                                         foreach($result10 as $value){
-                                            echo "\"". $value['nom_projet'] . "\",";
+                                            $req11 = $db->prepare('SELECT COUNT(id_participant) AS nbr FROM participant AS p INNER JOIN groupe AS g ON p.id_groupe=g.id_groupe INNER JOIN projet AS pr ON pr.id_projet=g.id_projet WHERE pr.id_projet = ?');
+                                            $exec = $req11->execute(array($value['id_projet']));
+                                            $result11 = $req11->fetchAll();
+                                            echo $result11[0]['nbr'] . ", ";
                                         }
-                                    ?>
-                            ],
-                            datasets: [
-                                {
-                                label: "Incrits",
-                                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                                data: [
-                                    <?php
-                                    foreach($result10 as $value){
-                                        $req11 = $db->prepare('SELECT COUNT(id_participant) AS nbr FROM participant AS p INNER JOIN groupe AS g ON p.id_groupe=g.id_groupe INNER JOIN projet AS pr ON pr.id_projet=g.id_projet WHERE pr.id_projet = ?');
-                                        $exec = $req11->execute(array($value['id_projet']));
-                                        $result11 = $req11->fetchAll();
-                                        echo $result11[0]['nbr'] . ", ";
+                                        ?>
+                                    ]
                                     }
-                                    ?>
                                 ]
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
                             },
-                            legend: { display: false },
-                            title: {
-                                display: true,
-                                text: 'Nombre d\'étudiant inscrit par promo'
+                            options: {
+                                responsive: true,
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                },
+                                legend: { display: false },
+                                title: {
+                                    display: true,
+                                    text: 'Nombre d\'étudiant inscrit par promo'
+                                }
                             }
-                        }
-                    });
+                        });
                     </script>
                 </div>
             </div>

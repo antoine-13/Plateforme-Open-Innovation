@@ -6,11 +6,19 @@
         $result = $req->fetchAll();
         $url_fichier = $result[0]['fichier_description'];
 
+        // definition du fichier de destination
         $url_fichier = '../' . $url_fichier;
         
+        // spécifie le type de fichier et force sont téléchargement 
         header('Content-Type: application/octet-stream');
+
+        // spécifie le mode d'encodage pour le transfert
         header('Content-Transfert-Encoding: Binary');
+
+        // donne le nom au fichier télécharger 
         header('Content-disposition: attachment; filename="' . basename($url_fichier) . '"');
+
+        // Lis le fichier
         echo readfile($url_fichier);
         
     }

@@ -30,8 +30,8 @@
                 unlink('../' . $file_description);
             }
 
-            if (!is_dir('../' . $dossier_projet)) {
-                mkdir('../' . $dossier_projet);
+            if (is_dir('../' . $dossier_projet)) {
+                rmdir('../' . $dossier_projet);
             }
 
         }
