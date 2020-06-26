@@ -23,15 +23,17 @@
             }
 
             $dossier_projet = 'files/' . $value['nom_projet'];
-
+            $dossier_rendu = $dossier_projet . '/rendu';
             $file_description = $dossier_projet . '/description.pdf';
             
             if(file_exists('../' . $file_description)) {
                 unlink('../' . $file_description);
             }
 
-            if (is_dir('../' . $dossier_projet)) {
-                rmdir('../' . $dossier_projet);
+            if (is_dir('../' . $dossier_rendu)) {
+                if(rmdir('../' . $dossier_rendu)){
+                    rmdir('../' . $dossier_projet);
+                }
             }
 
         }
