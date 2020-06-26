@@ -50,11 +50,8 @@ if($_SESSION["type"] == "etudiant"){
                             
                             ?>
                         </p>
-                        <form action="visu_projet.php" method="get">
-                            <input type="hidden" value="<?php echo $projet['id_projet']?>" name="id">
-                            <button type="submit"><span>Voir plus</span></button>
-                        </form>
                     </div>
+                    <a href="visu_projet.php?id=<?php echo $projet['id_projet']?>">Voir plus</a>
                 </div>
             <?php 
             } 

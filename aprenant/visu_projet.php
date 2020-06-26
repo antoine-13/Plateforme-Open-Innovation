@@ -11,7 +11,7 @@ if(isset($_GET['id'])){
     $exec = $req9->execute();
     $result9 = $req9->fetchAll();
     
-    if(in_array($id, $result9[0])){
+
     
     $req1 = $db->prepare("SELECT id_projet, nom_projet, id_createur, url_img FROM projet WHERE id_projet = ?");
     $exec = $req1->execute(array($id));
@@ -344,10 +344,7 @@ if(isset($_GET['id'])){
     </div>
 </div>
 <?php
-    }
-    else{
-        header('Location: projets.php');
-    }
+
 }
 else{
     header('Location: projets.php');
