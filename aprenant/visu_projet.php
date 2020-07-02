@@ -91,7 +91,7 @@ if(isset($_GET['id'])){
                 <p><?php echo $result4[0]['besoins']?></p>
             </div>
             <div>
-                <h3>Quels sont les outils ou les technos qui seront mis en œuvre ?</h3>
+                <h3>Quels sont les outils ou les technos qui seront mises en œuvre ?</h3>
                 <p><?php echo $result4[0]['technos']?></p>
             </div>
             <div>
@@ -307,16 +307,16 @@ if(isset($_GET['id'])){
                                         $exec = $req15->execute(array($id));
                                         $result15 = $req15->fetchAll();
                                          // Le message
-                                        $message = "Bonjour " . $prenom . ",\nVotre demande de changement de projet vers le projet " . $result15[0]['nom_projet'] . " à bien été prise en compte !\n Elle doit maintenant etre accepter.";
+                                        $message = "Bonjour " . $prenom . ",\nVotre demande de changement de projet vers le projet " . $result15[0]['nom_projet'] . " a bien été prise en compte !\n Elle doit maintenant être accepté.";
                                         $subject = "Demande de changement de projet";
                                         // Dans le cas où nos lignes comportent plus de 70 caractères, nous les coupons en utilisant wordwrap()
                                         $message = wordwrap($message, 70);
                                         
                                         mail($email,$subject,$message);
-                                        echo "<script>alert(\"Demande de changement de groupe prise en compte !\")</script>";  
+                                        echo "<script>alert(\"Demande de changement du groupe prise en compte !\")</script>";  
                                     }
                                     else{
-                                        echo "<script>alert(\"Sa sert à rien de se re-inscrire au projet PIGEON !\")</script>";
+                                        echo "<script>alert(\"Impossible de s'inscrire deux fois sur le même projet !\")</script>";
                                     }
                                 }
                                 else{
