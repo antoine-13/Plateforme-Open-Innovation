@@ -92,7 +92,7 @@ if(isset($_GET['id'])){
                 <p><?php echo $result4[0]['besoins']?></p>
             </div>
             <div>
-                <h3>Quels sont les outils ou les technos qui seront mis en œuvre ?</h3>
+                <h3>Quels sont les outils ou les technos qui seront mises en œuvre ?</h3>
                 <p><?php echo $result4[0]['technos']?></p>
             </div>
             <div>

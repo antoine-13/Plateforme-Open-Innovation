@@ -185,7 +185,7 @@ if($_SESSION["type"] == "professeur"){
                             }]
                         },
                         options: {
-                            //cutoutPercentage: 40,
+                            
                             responsive: true,
                             title: {
                                 display: true,
